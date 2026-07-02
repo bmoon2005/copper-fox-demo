@@ -914,13 +914,9 @@ function renderWoodStep(){
       ${badge}
       <div class="woodpreview" style="background-image:url('${w.photo}')"></div>
       <div class="obody">
-        <h4>${w.key}<span class="contrast ${ck}">Engraving: ${w.contrast}</span></h4>
+        <h4>${w.key}</h4>
         <div class="blurb">${w.blurb}</div>
-        <ul class="prosconlist">${w.pros.map(p=>`<li class="pro">${p}</li>`).join('')}</ul>
-        <div class="conhead">Good to know</div>
-        <ul class="prosconlist">${w.cons.map(x=>`<li class="con">${x}</li>`).join('')}</ul>
-        <div class="price">${w.up===0?'Included in base price':'+ $'+w.up}</div>
-        <button class="pickbtn" onclick="event.stopPropagation();pickWood('${w.key}')">${sel?'✓ Selected':'Choose '+w.key+' →'}</button>
+        <div class="price">${w.up===0?'Included':'+ $'+w.up}</div>
       </div>
     </div>`;}).join('')}</div>`;
 }
