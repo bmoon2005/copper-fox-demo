@@ -133,8 +133,9 @@
   .chip{background:#fff;border:1.6px solid var(--line);border-radius:22px;padding:8px 17px;font-size:.87rem;font-weight:800;color:var(--ink);transition:.14s}
   .chip:hover{border-color:var(--copper);color:var(--copper-dark)}
   .chip.on{background:var(--copper);border-color:var(--copper);color:#fff}
-  .chips.occ{gap:11px;margin-top:32px}
-  .chips.occ .chip{font-size:.98rem;padding:12px 22px}
+  .taggrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;max-width:940px;margin:30px auto 0}
+  @media(max-width:440px){.taggrid{grid-template-columns:1fr 1fr}}
+  .taggrid .chip{width:100%;text-align:center;font-size:.95rem;padding:14px 14px;line-height:1.25}
   .subhead{text-align:center;margin-top:44px}
   .subhead .plabel{font-size:.76rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
 
@@ -400,9 +401,9 @@
     <span class="eyebrow">Step 1 · The occasion</span>
     <h1>Who or what are we celebrating?</h1>
     <p class="sub">Choose an occasion and we'll pull together our best gift ideas for it — no endless scrolling.</p>
-    <div class="chips occ" id="occ-grid"></div>
+    <div class="taggrid" id="occ-grid"></div>
     <div class="subhead"><span class="plabel">Or shop by who it's for</span></div>
-    <div class="chips" id="person-chips"></div>
+    <div class="taggrid" id="person-chips"></div>
   </section>
 
   <!-- ============================ RESULTS ============================ -->
