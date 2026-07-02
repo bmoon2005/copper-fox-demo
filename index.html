@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Copper Fox Co — Handmade, Personalized Gifts</title>
+<link rel="icon" href="https://www.copperfoxco.com/cdn/shop/files/2021_round_logo_copy.png?v=1675713987&width=110">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Great+Vibes&family=Nunito+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --copper:#b0673a; --copper-dark:#8a4d27; --copper-soft:#efd9c6; --copper-tint:#f7ebe0;
+    --ink:#372a22; --ink-soft:#7d6c5e; --ink-faint:#a99a8c;
+    --cream:#faf5ee; --card:#ffffff; --line:#ece0d2;
+    --green:#5f7355; --green-soft:#e4ebdd;
+    --gold:#c99a4e;
+    --radius:16px; --radius-sm:11px;
+    --shadow:0 2px 12px rgba(55,42,34,.07);
+    --shadow-lg:0 16px 40px rgba(55,42,34,.16);
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Nunito Sans',system-ui,sans-serif;background:var(--cream);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+  img{max-width:100%;display:block}
+  button{font-family:inherit;cursor:pointer;color:inherit}
+  a{color:inherit}
+
+  /* ---------------- header ---------------- */
+  header{background:rgba(250,245,238,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:60}
+  .hwrap{max-width:var(--maxw);margin:0 auto;padding:11px 22px;display:flex;align-items:center;gap:13px}
+  .hwrap .logo{width:48px;height:48px;border-radius:50%;box-shadow:0 2px 8px rgba(55,42,34,.14)}
+  .brandblock .brand{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:600;letter-spacing:.2px;line-height:1}
+  .brandblock .tag{font-size:.7rem;color:var(--ink-soft);margin-top:3px;letter-spacing:.02em}
+  .hspacer{flex:1}
+  .startover{display:none;background:#fff;border:1px solid var(--line);border-radius:22px;padding:7px 15px;font-size:.82rem;font-weight:700;color:var(--ink-soft);transition:.15s}
+  .startover:hover{border-color:var(--copper);color:var(--copper-dark)}
+  .hlink{font-size:.82rem;color:var(--ink-soft);text-decoration:none;font-weight:700;white-space:nowrap}
+  .hlink:hover{color:var(--copper-dark)}
+
+  main{max-width:var(--maxw);margin:0 auto;padding:38px 22px 100px}
+  .screen{display:none;animation:fade .4s ease}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+  /* ---------------- typography ---------------- */
+  h1{font-family:'Fraunces',serif;font-size:clamp(1.9rem,4.4vw,3rem);font-weight:600;text-align:center;line-height:1.14;letter-spacing:-.01em}
+  .sub{color:var(--ink-soft);text-align:center;max-width:620px;margin:14px auto 0;font-size:1.06rem}
+  .eyebrow{display:block;text-align:center;font-size:.78rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--copper);margin-bottom:12px}
+  .backbtn{background:none;border:none;color:var(--ink-soft);font-size:.9rem;font-weight:800;padding:2px 6px 20px 0;display:inline-flex;align-items:center;gap:6px}
+  .backbtn:hover{color:var(--copper-dark)}
+
+  /* ---------------- home ---------------- */
+  .hero-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin:0 auto 20px;max-width:640px}
+  .hb{background:#fff;border:1px solid var(--line);border-radius:20px;padding:5px 14px;font-size:.76rem;font-weight:800;color:var(--ink-soft);letter-spacing:.02em}
+  .hb::before{content:"✦";color:var(--copper);margin-right:6px}
+  .doors{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:44px}
+  @media(max-width:720px){.doors{grid-template-columns:1fr}}
+  .door{position:relative;background:var(--card);border:1px solid var(--line);border-radius:22px;overflow:hidden;text-align:left;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s;display:flex;flex-direction:column}
+  .door:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+  .door .dimg{aspect-ratio:16/11;background-size:cover;background-position:center;position:relative}
+  .door .dimg::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(55,42,34,.28),transparent 55%)}
+  .door .dnum{position:absolute;top:16px;left:16px;z-index:2;width:38px;height:38px;border-radius:50%;background:#fff;color:var(--copper-dark);font-family:'Fraunces',serif;font-weight:700;font-size:1.15rem;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow)}
+  .door .dbody{padding:24px 26px 28px;flex:1;display:flex;flex-direction:column}
+  .door h3{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:600;margin-bottom:8px}
+  .door p{color:var(--ink-soft);font-size:.98rem;flex:1}
+  .door .go{margin-top:18px;display:inline-flex;align-items:center;gap:9px;align-self:flex-start;background:var(--copper);color:#fff;font-weight:800;font-size:.95rem;padding:11px 22px;border-radius:26px;transition:.15s}
+  .door:hover .go{background:var(--copper-dark);gap:13px}
+  .browse-all{text-align:center;margin-top:34px;font-size:.92rem;color:var(--ink-soft)}
+  .browse-all a{color:var(--copper-dark);font-weight:800;text-decoration:none;border-bottom:1.5px solid var(--copper-soft)}
+
+  /* three text/icon choices */
+  .choices{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:46px}
+  @media(max-width:540px){.choices{grid-template-columns:1fr}}
+  .choice{position:relative;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:32px 20px 26px;text-align:center;box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s,border-color .2s;display:flex;flex-direction:column;align-items:center;border-top:4px solid transparent}
+  .choice:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-top-color:var(--copper)}
+  .choice .ic{width:52px;height:52px;color:var(--copper);margin-bottom:16px}
+  .choice .ic svg{width:100%;height:100%}
+  .choice h3{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:600;margin-bottom:8px;line-height:1.15}
+  .choice p{color:var(--ink-soft);font-size:.89rem;flex:1}
+  .choice .go{margin-top:18px;color:var(--copper-dark);font-weight:800;font-size:.88rem}
+  .choice.feature{background:linear-gradient(165deg,#fff,#fbf0e6);border-color:var(--copper-soft)}
+  .choice .tagpill{position:absolute;top:16px;right:16px;background:var(--copper);color:#fff;font-size:.64rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase;padding:4px 10px;border-radius:11px}
+
+  /* personal shopper chat */
+  .chatwrap{max-width:720px;margin:28px auto 0}
+  .chatlog{display:flex;flex-direction:column;gap:14px;min-height:80px;margin-bottom:16px}
+  .msg{max-width:88%;padding:13px 17px;border-radius:17px;font-size:.96rem;line-height:1.5}
+  .msg.bot{background:#fff;border:1px solid var(--line);border-bottom-left-radius:5px;align-self:flex-start;box-shadow:var(--shadow)}
+  .msg.user{background:var(--copper);color:#fff;border-bottom-right-radius:5px;align-self:flex-end}
+  .msg.bot strong{color:var(--copper-dark)}
+  .chatcards{align-self:stretch;display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:12px;margin:2px 0}
+  .ccard{background:#fff;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;cursor:pointer;transition:.15s;text-align:left}
+  .ccard:hover{border-color:var(--copper);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+  .ccard .cimg{aspect-ratio:1/1;background-size:cover;background-position:center;background-color:#efe7db;position:relative}
+  .ccard .cbadge{position:absolute;top:7px;left:7px;font-size:.58rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;padding:3px 7px;border-radius:9px;color:#fff}
+  .ccard .cbadge.best{background:var(--copper)}
+  .ccard .cbadge.box{background:var(--green)}
+  .ccard .cb{padding:9px 11px 11px}
+  .ccard h4{font-size:.82rem;font-weight:800;line-height:1.25}
+  .ccard .price{color:var(--copper-dark);font-weight:800;font-size:.82rem;margin-top:4px}
+  .refinechips{align-self:flex-start;display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
+  .rfchip{background:#fff;border:1.6px solid var(--copper-soft);border-radius:20px;padding:8px 15px;font-size:.85rem;font-weight:800;color:var(--copper-dark);transition:.14s}
+  .rfchip:hover{background:var(--copper);border-color:var(--copper);color:#fff}
+  .qchips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .qchip{background:none;border:1.5px solid var(--line);border-radius:20px;padding:8px 15px;font-size:.85rem;font-weight:700;color:var(--ink-soft);transition:.14s}
+  .qchip:hover{border-color:var(--copper);color:var(--copper-dark)}
+  .chatinput{display:flex;gap:10px}
+  .chatinput input{flex:1;padding:14px 18px;border:1.7px solid var(--line);border-radius:26px;font-size:1rem;font-family:inherit;background:#fff;transition:.14s}
+  .chatinput input:focus{outline:none;border-color:var(--copper);box-shadow:0 0 0 3px var(--copper-soft)}
+  .chatinput button{background:var(--copper);color:#fff;border:none;border-radius:26px;padding:0 26px;font-weight:800;font-size:.95rem;transition:.15s}
+  .chatinput button:hover{background:var(--copper-dark)}
+
+  /* ---------------- generic option grid ---------------- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px;margin-top:30px}
+  .opt{position:relative;background:var(--card);border:2px solid var(--line);border-radius:var(--radius);overflow:hidden;text-align:left;transition:transform .16s,border-color .16s,box-shadow .16s;cursor:pointer}
+  .opt:hover{transform:translateY(-4px);border-color:var(--copper);box-shadow:var(--shadow-lg)}
+  .opt.selected{border-color:var(--copper);box-shadow:0 0 0 3px var(--copper-soft)}
+  .opt .oimg{aspect-ratio:4/3;background-size:cover;background-position:center;background-color:#efe7db}
+  .opt .obody{padding:13px 15px 16px}
+  .opt h4{font-size:1rem;font-weight:800;line-height:1.3}
+  .opt .osub{font-size:.83rem;color:var(--ink-soft);margin-top:3px;line-height:1.4}
+  .opt .price{color:var(--copper-dark);font-weight:800;font-size:.9rem;margin-top:8px}
+  .badge{position:absolute;top:11px;left:11px;z-index:2;font-size:.65rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase;padding:4px 10px;border-radius:13px;color:#fff}
+  .badge.best{background:var(--copper)}
+  .badge.box{background:var(--green)}
+  .badge.pop{background:var(--gold)}
+
+  /* occasion tile */
+  .occ-emoji{font-size:1.15rem;margin-right:5px}
+
+  /* chips */
+  .chips{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:22px}
+  .chips.left{justify-content:flex-start}
+  .chip{background:#fff;border:1.6px solid var(--line);border-radius:22px;padding:8px 17px;font-size:.87rem;font-weight:800;color:var(--ink);transition:.14s}
+  .chip:hover{border-color:var(--copper);color:var(--copper-dark)}
+  .chip.on{background:var(--copper);border-color:var(--copper);color:#fff}
+  .subhead{text-align:center;margin-top:44px}
+  .subhead .plabel{font-size:.76rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
+
+  /* ---------------- results ---------------- */
+  .refinebar{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin-top:24px;padding:14px;background:var(--copper-tint);border-radius:14px}
+  .refinebar .rlabel{font-size:.78rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--copper-dark);margin-right:4px}
+  .rchip{background:#fff;border:1.6px solid transparent;border-radius:20px;padding:7px 15px;font-size:.84rem;font-weight:800;color:var(--ink-soft);transition:.14s}
+  .rchip:hover{color:var(--copper-dark)}
+  .rchip.on{background:var(--copper);color:#fff}
+  .resultmeta{text-align:center;margin-top:16px;color:var(--ink-soft);font-size:.92rem}
+  .cardbtns{display:flex;gap:8px;margin-top:11px}
+  .btn{border:none;border-radius:10px;padding:10px 15px;font-size:.86rem;font-weight:800;transition:.15s;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:7px}
+  .btn-copper{background:var(--copper);color:#fff}
+  .btn-copper:hover{background:var(--copper-dark)}
+  .btn-ghost{background:#fff;border:1.6px solid var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--copper);color:var(--copper-dark)}
+  .btn-big{padding:14px 30px;font-size:1rem;border-radius:12px}
+  .morebtn{display:block;margin:34px auto 0;background:#fff;border:2px solid var(--copper);color:var(--copper-dark);border-radius:28px;padding:12px 32px;font-weight:800;font-size:.95rem;transition:.15s}
+  .morebtn:hover{background:var(--copper);color:#fff}
+  .empty{text-align:center;color:var(--ink-soft);margin-top:40px}
+
+  /* ---------------- stepper / customizer ---------------- */
+  .steps{display:flex;justify-content:center;gap:5px;margin:10px 0 2px;flex-wrap:wrap}
+  .step{display:flex;align-items:center;gap:7px;font-size:.79rem;font-weight:800;color:var(--ink-faint);padding:5px 12px;border-radius:20px}
+  .step .n{width:23px;height:23px;border-radius:50%;background:var(--line);display:flex;align-items:center;justify-content:center;font-size:.73rem;color:var(--ink-soft);font-weight:900}
+  .step.done{color:var(--green)}
+  .step.done .n{background:var(--green);color:#fff}
+  .step.now{background:var(--copper-soft);color:var(--copper-dark)}
+  .step.now .n{background:var(--copper);color:#fff}
+
+  .custwrap{display:block;margin-top:28px}
+  .summary{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);margin-top:34px}
+  .summary h5{font-family:'Fraunces',serif;font-size:1.15rem;margin-bottom:16px}
+  .summary .sumgrid{display:grid;grid-template-columns:210px 1fr;gap:26px;align-items:start}
+  @media(max-width:600px){.summary .sumgrid{grid-template-columns:1fr}}
+  .summary .simg{width:100%;aspect-ratio:4/3;background-size:cover;background-position:center;border-radius:10px;background-color:#efe7db}
+  .srow{display:flex;justify-content:space-between;gap:10px;font-size:.87rem;padding:7px 0;border-bottom:1px dashed var(--line)}
+  .srow .k{color:var(--ink-soft);white-space:nowrap}
+  .srow .v{font-weight:800;text-align:right}
+  .stotal{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;font-weight:800;font-size:1rem}
+  .stotal .amt{color:var(--copper-dark);font-family:'Fraunces',serif;font-size:1.5rem}
+  .snote{font-size:.72rem;color:var(--ink-faint);margin-top:10px;line-height:1.45}
+
+  /* wood cards */
+  .woodgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px;margin-top:26px}
+  .woodcard{display:flex;flex-direction:column;text-align:left}
+  .wood .sw{height:118px;border-radius:14px 14px 0 0;position:relative;overflow:hidden}
+  .wood .sw::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(92deg,rgba(255,255,255,.05) 0 3px,rgba(0,0,0,.06) 3px 8px)}
+  .woodcard .obody{padding:15px 17px 18px}
+  .woodcard h4{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:1.12rem}
+  .contrast{font-size:.66rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:11px;white-space:nowrap}
+  .contrast.high{background:var(--green-soft);color:#43592f}
+  .contrast.low{background:#f6e6cf;color:#8a5a1e}
+  .woodcard .blurb{font-size:.86rem;color:var(--ink-soft);margin:5px 0 12px}
+  .prosconlist{list-style:none;font-size:.83rem;margin:0}
+  .prosconlist li{position:relative;padding:3px 0 3px 22px;line-height:1.4}
+  .prosconlist li.pro::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:900}
+  .prosconlist li.con::before{content:"•";position:absolute;left:2px;color:var(--copper);font-weight:900}
+  .prosconlist li.con{color:var(--ink-soft)}
+  .conhead{font-size:.72rem;font-weight:900;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint);margin:11px 0 3px}
+  .woodcard .price{margin-top:13px;font-size:1rem}
+  .pickbtn{margin-top:13px;width:100%;background:var(--copper);color:#fff;border:none;border-radius:10px;padding:11px;font-weight:800;font-size:.9rem;transition:.15s}
+  .woodcard:hover .pickbtn{background:var(--copper-dark)}
+  .opt.selected .pickbtn{background:var(--green)}
+
+  /* board mockup */
+  .mockup{width:100%;height:auto;display:block}
+  .woodpreview{background:#efe7db;border-radius:14px 14px 0 0;overflow:hidden;position:relative}
+  .mocklabel{position:absolute;bottom:7px;left:0;right:0;text-align:center;font-size:.62rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.85);text-shadow:0 1px 3px rgba(0,0,0,.4)}
+  .summary .simg,.review .rimg{background:#efe7db;overflow:hidden}
+  .review .rimg .mockup{border-radius:12px}
+
+  /* wood-match quiz */
+  .quiz{max-width:660px}
+  .qgroup{margin-bottom:24px}
+  .qgroup .qq{font-weight:800;font-size:1.05rem;margin-bottom:11px}
+  .qopts{display:flex;flex-wrap:wrap;gap:10px}
+  .qopt{background:#fff;border:1.7px solid var(--line);border-radius:12px;padding:12px 17px;font-weight:800;font-size:.9rem;color:var(--ink);transition:.14s;text-align:left}
+  .qopt:hover{border-color:var(--copper);color:var(--copper-dark)}
+  .qopt.on{background:var(--copper);border-color:var(--copper);color:#fff}
+  .woodrec{background:var(--green-soft);border:1px solid #cdddc0;border-radius:14px;padding:17px 21px;margin-bottom:20px}
+  .woodrec .rt{font-family:'Fraunces',serif;font-weight:700;color:#3b5330;font-size:1.2rem}
+  .woodrec .rd{font-size:.92rem;color:#4a5c3e;margin-top:4px;line-height:1.5}
+  .woodrec .rd2{font-size:.9rem;color:#4a5c3e;margin-top:8px;padding-top:8px;border-top:1px dashed #cdddc0;line-height:1.5}
+  .woodrec .retake{display:inline-block;margin-top:11px;color:var(--copper-dark);font-weight:800;cursor:pointer;font-size:.86rem}
+  .woodrec .retake:hover{text-decoration:underline}
+  .badge.match{background:#3b5330}
+  .badge.second{background:#7d9068}
+
+  /* style (shape) cards */
+  .stylegrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-top:26px}
+  .stylecard{text-align:center;padding:24px 18px 22px}
+  .shape{margin:4px auto 16px;background:linear-gradient(120deg,#c99a63,#a9764a);box-shadow:inset 0 0 0 2px rgba(0,0,0,.06)}
+  .shape.handle{width:120px;height:88px;border-radius:9px;position:relative}
+  .shape.handle::after{content:"";position:absolute;top:50%;right:-30px;transform:translateY(-50%);width:40px;height:30px;border-radius:6px;background:linear-gradient(120deg,#c99a63,#a9764a)}
+  .shape.handle::before{content:"";position:absolute;top:50%;right:-13px;transform:translateY(-50%);width:12px;height:12px;border-radius:50%;background:var(--cream);z-index:2}
+  .shape.square{width:130px;height:92px;border-radius:8px}
+  .shape.round{width:104px;height:104px;border-radius:50%}
+  .stylecard h4{font-size:1.08rem}
+  .stylecard .osub{margin-top:5px}
+
+  /* add-ons */
+  .addongrid{display:grid;grid-template-columns:1fr;gap:11px;margin-top:8px;max-width:560px}
+  .addon{display:flex;align-items:center;gap:14px;width:100%;background:#fff;border:2px solid var(--line);border-radius:12px;padding:14px 16px;text-align:left;transition:.13s}
+  .addon:hover{border-color:var(--copper)}
+  .addon.on{border-color:var(--copper);background:#fdf8f2;box-shadow:0 0 0 3px var(--copper-soft)}
+  .addon .aicon{font-size:1.5rem;flex:none;width:34px;text-align:center}
+  .addon .check{width:24px;height:24px;border-radius:7px;border:2px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;transition:.13s}
+  .addon.on .check{background:var(--copper);border-color:var(--copper)}
+  .addon .aname{font-weight:800;font-size:.96rem}
+  .addon .adesc{font-size:.82rem;color:var(--ink-soft)}
+  .addon .aprice{margin-left:auto;font-weight:900;color:var(--copper-dark);white-space:nowrap}
+
+  /* size list */
+  .sizesec h6{font-size:.76rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin:28px 0 12px}
+  .sizeopt{display:flex;justify-content:space-between;align-items:center;width:100%;background:#fff;border:2px solid var(--line);border-radius:12px;padding:14px 17px;margin-bottom:10px;text-align:left;transition:.13s}
+  .sizeopt:hover{border-color:var(--copper)}
+  .sizeopt.selected{border-color:var(--copper);background:#fdf8f2;box-shadow:0 0 0 3px var(--copper-soft)}
+  .sizeopt .sname{font-weight:800;font-size:.96rem}
+  .sizeopt .suse{font-size:.8rem;color:var(--ink-soft)}
+  .sizeopt .sprice{font-weight:900;color:var(--copper-dark);white-space:nowrap;margin-left:14px;font-size:.98rem}
+
+  /* personalize fields */
+  .fieldwrap{max-width:540px;margin-top:8px}
+  .field{margin-bottom:20px}
+  .field label{display:block;font-weight:800;font-size:.92rem;margin-bottom:7px}
+  .field input{width:100%;padding:13px 15px;border:1.6px solid var(--line);border-radius:10px;font-size:1.02rem;font-family:inherit;background:#fff;transition:.14s}
+  .field input:focus{outline:none;border-color:var(--copper);box-shadow:0 0 0 3px var(--copper-soft)}
+  .field .hint{font-size:.78rem;color:var(--ink-faint);margin-top:5px}
+  .navrow{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+  .navrow .btn[disabled]{opacity:.4;cursor:default;pointer-events:none}
+
+  /* review */
+  .review{max-width:660px;margin:28px auto 0;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:30px;box-shadow:var(--shadow-lg)}
+  .review .rimg{aspect-ratio:16/10;border-radius:12px;background-size:cover;background-position:center;margin-bottom:22px;background-color:#efe7db}
+  .review .stotal{border-top:1.5px solid var(--line);padding-top:14px;margin-top:16px}
+  .note{max-width:660px;margin:20px auto 0;background:var(--green-soft);border-radius:12px;padding:15px 20px;font-size:.86rem;color:#455a3d;line-height:1.5}
+  .note strong{color:#324229}
+
+  /* ---------------- modal ---------------- */
+  .overlay{display:none;position:fixed;inset:0;background:rgba(45,33,24,.6);z-index:100;align-items:center;justify-content:center;padding:20px}
+  .overlay.open{display:flex;animation:fade .25s ease}
+  .modal{background:#fff;border-radius:18px;max-width:540px;width:100%;max-height:90vh;overflow:auto;padding:0}
+  .modal .mimg{aspect-ratio:16/11;background-size:cover;background-position:center;background-color:#efe7db}
+  .modal .mbody{padding:26px 28px 30px;position:relative}
+  .modal h3{font-family:'Fraunces',serif;font-size:1.45rem;font-weight:600;padding-right:30px}
+  .modal .mprice{color:var(--copper-dark);font-weight:900;font-size:1.1rem;margin:8px 0 14px}
+  .modal p{font-size:.93rem;color:var(--ink-soft)}
+  .modal .cardbtns{margin-top:22px;flex-direction:column}
+  .modal .cardbtns .btn{width:100%}
+  .mclose{position:absolute;top:-12px;right:0;background:none;border:none;font-size:1.7rem;color:var(--ink-faint);line-height:1;padding:8px}
+  .mclose:hover{color:var(--ink)}
+
+  footer{border-top:1px solid var(--line);background:#fff;padding:26px 22px;text-align:center;font-size:.8rem;color:var(--ink-faint);line-height:1.6}
+  footer a{color:var(--copper-dark);font-weight:700}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hwrap">
+    <img class="logo" src="https://www.copperfoxco.com/cdn/shop/files/2021_round_logo_copy.png?v=1675713987&width=220" alt="Copper Fox Co logo">
+    <div class="brandblock">
+      <div class="brand">Copper Fox Co</div>
+      <div class="tag">Handmade &amp; personalized · Utah, since 2013</div>
+    </div>
+    <div class="hspacer"></div>
+    <button class="startover" id="startover" onclick="go('home')">↻ Start over</button>
+    <a class="hlink" href="https://www.copperfoxco.com" target="_blank" rel="noopener">Current site ↗</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================ HOME ============================ -->
+  <section class="screen active" id="scr-home">
+    <span class="eyebrow">Handmade &amp; personalized · Utah, since 2013</span>
+    <h1>What brings you in today?</h1>
+    <p class="sub">Pick where you'd like to start — we'll walk you the rest of the way, no overwhelm.</p>
+    <div class="choices">
+      <button class="choice" onclick="startCustomizer(null,false)">
+        <span class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6.5" width="14" height="14" rx="2.5"/><circle cx="20" cy="5" r="1.5"/><path d="m18.7 6.3-1.4 1.4"/><path d="M6.5 11h7M6.5 14h7M6.5 17h4.5"/></svg>
+        </span>
+        <h3>Design a cutting board</h3>
+        <p>Build your own from scratch — wood, shape, size, design, and engraving. We'll guide every step.</p>
+        <span class="go">Start designing →</span>
+      </button>
+      <button class="choice" onclick="go('occasions')">
+        <span class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="9" width="17" height="11.5" rx="1.5"/><path d="M3.5 13h17M12 9v11.5"/><path d="M12 9s-1.8-5-4.3-5S4.6 7.2 6 8.4C7 9.2 12 9 12 9Z"/><path d="M12 9s1.8-5 4.3-5S19.4 7.2 18 8.4C17 9.2 12 9 12 9Z"/></svg>
+        </span>
+        <h3>Shop for a person or event</h3>
+        <p>Wedding, new home, a graduate, Mom, a thank-you? Tell us the occasion and we'll hand you our best ideas.</p>
+        <span class="go">Find the perfect gift →</span>
+      </button>
+      <button class="choice feature" onclick="startShopper()">
+        <span class="tagpill">New</span>
+        <span class="ic">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4.5h12a2.5 2.5 0 0 1 2.5 2.5v5A2.5 2.5 0 0 1 16 14.5H9l-4 3v-3H4A2.5 2.5 0 0 1 1.5 12V7A2.5 2.5 0 0 1 4 4.5Z" transform="translate(1.5 1)"/><path d="M20 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg>
+        </span>
+        <h3>Use our personal shopper</h3>
+        <p>Not sure where to start? Just type who it's for and we'll find the right gift for you.</p>
+        <span class="go">Chat with our shopper →</span>
+      </button>
+    </div>
+    <div class="hero-badges" style="margin-top:42px">
+      <span class="hb">Handmade in Utah</span>
+      <span class="hb">Family-owned since 2013</span>
+      <span class="hb">Personalization always included</span>
+      <span class="hb">Heirloom quality</span>
+    </div>
+    <p class="browse-all">Prefer to just browse? <a href="https://www.copperfoxco.com/collections/all" target="_blank" rel="noopener">See everything on our current site ↗</a></p>
+  </section>
+
+  <!-- ============================ PERSONAL SHOPPER ============================ -->
+  <section class="screen" id="scr-shopper">
+    <button class="backbtn" onclick="go('home')">← Back</button>
+    <span class="eyebrow">Your personal shopper</span>
+    <h1>Let's find the perfect gift.</h1>
+    <p class="sub">Type it just like you'd say it — who it's for, the occasion, a budget. I'll do the searching.</p>
+    <div class="chatwrap">
+      <div class="chatlog" id="chatlog"></div>
+      <div class="qchips" id="chatquick"></div>
+      <div class="chatinput">
+        <input id="chatfield" type="text" placeholder="e.g. a wedding gift for my sister, around $50" autocomplete="off"
+          onkeydown="if(event.key==='Enter')sendChat()">
+        <button onclick="sendChat()">Send</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ OCCASIONS ============================ -->
+  <section class="screen" id="scr-occasions">
+    <button class="backbtn" onclick="go('home')">← Back</button>
+    <span class="eyebrow">Step 1 · The occasion</span>
+    <h1>Who or what are we celebrating?</h1>
+    <p class="sub">Choose an occasion and we'll pull together our best gift ideas for it — no endless scrolling.</p>
+    <div class="grid" id="occ-grid"></div>
+    <div class="subhead"><span class="plabel">Or shop by who it's for</span></div>
+    <div class="chips" id="person-chips"></div>
+  </section>
+
+  <!-- ============================ RESULTS ============================ -->
+  <section class="screen" id="scr-results">
+    <button class="backbtn" onclick="go('occasions')">← Back to occasions</button>
+    <span class="eyebrow">Step 2 · Handpicked for you</span>
+    <h1 id="results-title">Our best gift ideas</h1>
+    <div class="refinebar" id="refinebar"></div>
+    <p class="resultmeta" id="results-meta"></p>
+    <div class="grid" id="results-grid"></div>
+    <button class="morebtn" id="results-more" onclick="showMore()">Show more ideas</button>
+  </section>
+
+  <!-- ============================ CUSTOMIZER ============================ -->
+  <section class="screen" id="scr-cust">
+    <button class="backbtn" id="cust-back" onclick="custBack()">← Back</button>
+    <div class="steps" id="cust-steps"></div>
+    <span class="eyebrow" id="cust-eyebrow"></span>
+    <h1 id="cust-title"></h1>
+    <p class="sub" id="cust-sub"></p>
+    <div class="custwrap">
+      <div id="cust-body"></div>
+      <aside class="summary" id="cust-summary"></aside>
+    </div>
+  </section>
+
+</main>
+
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modal"></div>
+</div>
+
+<footer>
+  Prototype for Copper Fox Co · Real products, photos &amp; designs from <a href="https://www.copperfoxco.com" target="_blank" rel="noopener">copperfoxco.com</a><br>
+  In the live version, the buy buttons carry each customer's exact choices straight into checkout — nothing re-entered.
+</footer>
+
+<script src="catalog.js"></script>
+<script>
+const C = window.CATALOG;
+const $ = id => document.getElementById(id);
+const esc = s => (s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+const PRODUCT_URL = h => `https://www.copperfoxco.com/products/${h}`;
+
+/* ============================ STATE ============================ */
+const state = {
+  occasion:null, catFilter:null, catLabel:'',
+  budget:[0,9999], shown:9,
+  cust:{ step:1, wood:null, style:null, size:null, design:null, fields:{}, addons:{}, fromResults:false }
+};
+
+/* ============================ NAV ============================ */
+function go(screen){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  $('scr-'+screen).classList.add('active');
+  $('startover').style.display = screen==='home' ? 'none' : 'inline-block';
+  window.scrollTo({top:0});
+  if(screen==='results') renderResults();
+  if(screen==='cust')    renderCust();
+}
+
+/* ============================ OCCASIONS ============================ */
+const OCC_META = {
+  wedding:      {emoji:'💍', sub:'Engagements, showers & the big day'},
+  housewarming: {emoji:'🏡', sub:'New homes & first apartments'},
+  mom:          {emoji:'🌷', sub:"Mother's Day, birthdays & just because"},
+  dad:          {emoji:'🪓', sub:"Father's Day & the grill master"},
+  graduation:   {emoji:'🎓', sub:'High school, college & beyond'},
+  birthday:     {emoji:'🎂', sub:"Something they'll actually keep"},
+  anniversary:  {emoji:'❤️', sub:"Anniversaries & Valentine's Day"},
+  thankyou:     {emoji:'🤝', sub:'Teachers, realtors, clients & admin day'},
+  baby:         {emoji:'👶', sub:'New babies & grandparents-to-be'},
+  memorial:     {emoji:'🕊️', sub:'Sympathy & remembrance, gently done'},
+};
+// order occasions by how many gifts back them (richest first), then a sensible tail
+const OCC_ORDER = ['wedding','housewarming','birthday','mom','thankyou','anniversary','graduation','dad','baby','memorial'];
+const PERSONS = [
+  ['For Mom','mom'],['For Grandma','mom'],['For Dad','dad'],['For a Couple','wedding'],
+  ['New Homeowner','housewarming'],['A Teacher','thankyou'],['A Coworker','thankyou'],
+  ['The Graduate','graduation'],['A Friend','birthday'],['New Parents','baby']
+];
+
+function occPhoto(key){
+  const pool = C.products.filter(p=>p.occ.includes(key));
+  const best = pool.find(p=>p.best) || pool[0];
+  return best ? best.img : '';
+}
+function renderOccasions(){
+  $('occ-grid').innerHTML = OCC_ORDER.filter(k=>C.occasions[k]).map(key=>{
+    const def=C.occasions[key], m=OCC_META[key]||{emoji:'🎁',sub:''};
+    const n = C.products.filter(p=>p.occ.includes(key)).length;
+    return `<button class="opt" onclick="pickOccasion('${key}')">
+      <div class="oimg" style="background-image:url('${occPhoto(key)}')"></div>
+      <div class="obody">
+        <h4><span class="occ-emoji">${m.emoji}</span>${def.label}</h4>
+        <div class="osub">${m.sub}</div>
+        <div class="price">${n} gift ideas →</div>
+      </div></button>`;
+  }).join('');
+  $('person-chips').innerHTML = PERSONS.map(([label,key])=>
+    `<button class="chip" onclick="pickOccasion('${key}')">${label}</button>`).join('');
+}
+function pickOccasion(key){ state.occasion=key; state.catFilter=null; state.budget=[0,9999]; state.shown=9; go('results'); }
+
+/* ============================ RESULTS ============================ */
+const BUDGETS = [['Any budget',0,9999],['Under $25',0,24.99],['$25–$50',25,50],['$50+',50,9999]];
+function setBudget(lo,hi){ state.budget=[lo,hi]; state.shown=9; renderResults(); }
+
+function curatedPool(){
+  let pool = state.catFilter
+    ? (state.catFilter.giftbox ? C.products.filter(p=>p.giftbox) : C.products.filter(p=>p.type===state.catFilter.type))
+    : C.products.filter(p=>p.occ.includes(state.occasion));
+  const [lo,hi]=state.budget;
+  pool = pool.filter(p=>p.min>=lo-0.01 && p.min<=hi);
+  // rank: gift boxes, then best sellers, then low-to-high
+  pool.sort((a,b)=> (b.giftbox*2+b.best)-(a.giftbox*2+a.best) || a.min-b.min);
+  // interleave by type so the top of the page isn't all one product
+  const byType={}; pool.forEach(p=>{(byType[p.type]=byType[p.type]||[]).push(p);});
+  const types=Object.keys(byType), mixed=[];
+  for(let r=0; mixed.length<pool.length; r++) for(const t of types) if(byType[t][r]) mixed.push(byType[t][r]);
+  return mixed;
+}
+function renderResults(){
+  const label = state.catFilter ? state.catLabel : C.occasions[state.occasion].label;
+  $('results-title').textContent = state.catFilter ? label : `Our best ${label} gifts`;
+  // refine bar (budget only — optional, zero forced steps)
+  $('refinebar').innerHTML = `<span class="rlabel">Budget</span>` + BUDGETS.map(([lbl,lo,hi])=>{
+    const on = state.budget[0]===lo && state.budget[1]===hi;
+    return `<button class="rchip ${on?'on':''}" onclick="setBudget(${lo},${hi})">${lbl}</button>`;
+  }).join('');
+  const list = curatedPool();
+  const [lo,hi]=state.budget;
+  const btxt = (lo===0&&hi>=9999)?'any budget':(hi>=9999?`$${lo}+`:(lo===0?`under $${Math.ceil(hi)}`:`$${lo}–$${hi}`));
+  $('results-meta').textContent = list.length
+    ? `${list.length} handpicked idea${list.length>1?'s':''} · ${btxt} · every one personalized free`
+    : '';
+  if(!list.length){
+    $('results-grid').innerHTML = `<div class="empty" style="grid-column:1/-1">No gifts in this budget — <a href="#" onclick="setBudget(0,9999);return false" style="color:var(--copper-dark);font-weight:800">show every price</a>.</div>`;
+    $('results-more').style.display='none'; return;
+  }
+  $('results-grid').innerHTML = list.slice(0,state.shown).map(cardHTML).join('');
+  $('results-more').style.display = list.length>state.shown ? 'block':'none';
+}
+function cardHTML(p){
+  const i = C.products.indexOf(p);
+  const isBoard = p.type==='Wooden Cutting Board';
+  const badge = p.giftbox ? '<span class="badge box">Gift Box</span>' : (p.best ? '<span class="badge best">Best Seller</span>' : '');
+  const price = p.min===p.max ? `$${p.min}` : `from $${p.min}`;
+  const action = isBoard ? `customizeFromCard(${i})` : `openModal(${i})`;
+  const btn = isBoard
+    ? `<button class="btn btn-copper" onclick="event.stopPropagation();customizeFromCard(${i})">Customize this board →</button>`
+    : `<button class="btn btn-copper" onclick="event.stopPropagation();openModal(${i})">Personalize &amp; order</button>`;
+  return `<div class="opt" onclick="${action}">
+    ${badge}
+    <div class="oimg" style="background-image:url('${p.img}')"></div>
+    <div class="obody"><h4>${esc(p.title)}</h4><div class="price">${price}</div>
+    <div class="cardbtns">${btn}</div></div></div>`;
+}
+function showMore(){ state.shown+=9; renderResults(); }
+
+/* ============================ MODAL (non-board products) ============================ */
+function openModal(i){
+  const p=C.products[i];
+  const price = p.min===p.max ? `$${p.min}` : `from $${p.min}`;
+  $('modal').innerHTML = `
+    <div class="mimg" style="background-image:url('${p.img}')"></div>
+    <div class="mbody">
+      <button class="mclose" onclick="closeModal()">×</button>
+      <h3>${esc(p.title)}</h3>
+      <div class="mprice">${price}</div>
+      <p>Personalized just for them and handmade in our Utah workshop. Tap below to add your names, dates, or message and order it.</p>
+      <div class="cardbtns">
+        <a class="btn btn-copper" href="${PRODUCT_URL(p.handle)}" target="_blank" rel="noopener">Personalize &amp; order →</a>
+        <button class="btn btn-ghost" onclick="closeModal()">Keep browsing</button>
+      </div>
+    </div>`;
+  $('overlay').classList.add('open');
+}
+function closeModal(){ $('overlay').classList.remove('open'); }
+
+/* ============================ BOARD CUSTOMIZER ============================ */
+// engraving: 'high' = shows up a lot | 'low' = shows up softer
+// even: true = consistent engraving | false = engraving can look uneven
+// character: 'lots' | 'medium' | 'flawless' | 'uniform'  (natural knots/variation in the wood)
+const WOODS = [
+  {key:'Bamboo', up:0, color:'#cdae7e', contrast:'High', tag:'Most affordable',
+    engraving:'high', even:false, character:'uniform',
+    blurb:'Light golden board where your engraving really pops.',
+    pros:['Engraving shows up boldly — lots of contrast','Bright, light, modern color','Eco-friendly & fast-renewing','Included — our budget-friendly board'],
+    cons:['Made of pressed pieces, so the engraving can look uneven — a little darker or lighter in spots','More uniform look, less natural-wood character']},
+  {key:'Cherry', up:14, color:'#a85c3a', contrast:'High', tag:null,
+    engraving:'high', even:true, character:'medium',
+    blurb:'Warm reddish wood — clear, even engraving with gentle character.',
+    pros:['Engraving shows up well and stays even','Warm, inviting reddish tone','Medium natural variation — character without heavy knots','Ages into a deeper, richer color'],
+    cons:['A softer hardwood — shows everyday wear a little sooner','Naturally darkens over time from the color you see today']},
+  {key:'Walnut', up:18, color:'#5c4130', contrast:'Lower', pop:true, tag:'Most popular',
+    engraving:'low', even:true, character:'lots',
+    blurb:'Rich, dark chocolate wood, full of natural character.',
+    pros:['Deep, dramatic color — our most-gifted wood','Beautiful natural knots, streaks & variation','A true heirloom look'],
+    cons:['Engraving does NOT show up as much — the design reads soft and subtle on the dark wood','Lots of natural variation — gorgeous character to some, not a uniform look']},
+  {key:'Mahogany', up:22, color:'#7a3728', contrast:'High', tag:'Most flawless',
+    engraving:'high', even:true, character:'flawless',
+    blurb:'Elegant red-brown wood — crisp engraving and almost no flaws.',
+    pros:['Engraving shows up clearly and evenly','Almost no knots or imperfections — our most flawless wood','Rich red under-hue','Premium heirloom feel'],
+    cons:['Our top price point']},
+];
+const WOOD_Q = [
+  {k:'vis', q:'How much do you want the engraving to show up?',
+    opts:[['high','Show it off — bold & clear'],['low','Softer & more subtle']]},
+  {k:'character', q:'How do you feel about natural knots, streaks & variation in the wood?',
+    opts:[['lots','I love the natural character'],['medium','A balanced, moderate look'],['flawless','Clean & nearly flawless']]},
+  {k:'even', q:'Should the engraving look even & consistent across the whole board?',
+    opts:[['yes','Yes — nice and even'],['ok','A little variation is fine']]},
+];
+function scoreWoods(p){
+  const s={Bamboo:0,Cherry:0,Walnut:0,Mahogany:0};
+  if(p.vis==='high'){ s.Bamboo+=2; s.Cherry+=2; s.Mahogany+=2; }
+  if(p.vis==='low'){  s.Walnut+=3; }
+  if(p.character==='lots'){     s.Walnut+=3; s.Cherry+=1; }
+  if(p.character==='medium'){   s.Cherry+=3; s.Mahogany+=1; }
+  if(p.character==='flawless'){ s.Mahogany+=3; s.Bamboo+=1; }
+  if(p.even==='yes'){ s.Cherry+=1; s.Mahogany+=1; s.Walnut+=1; s.Bamboo-=2; }
+  if(p.even==='ok'){  s.Bamboo+=1; }
+  return s;
+}
+const WOOD_WHY = {
+  Walnut:"Walnut's dark wood keeps the engraving subtle and is full of natural knots and character.",
+  Cherry:'Cherry shows engraving clearly and evenly, with just a gentle, medium variation.',
+  Mahogany:'Mahogany shows engraving crisply and is our most flawless, even wood — with a rich red hue.',
+  Bamboo:'Bamboo makes the engraving pop and keeps things light and budget-friendly.'
+};
+function recReason(p,key){
+  const vis = p.vis==='high' ? 'engraving that really stands out' : 'a soft, subtle engraving';
+  const ch  = {lots:'lots of natural character',medium:'a balanced, moderate look',flawless:'a clean, flawless surface'}[p.character];
+  const ev  = p.even==='yes' ? 'even engraving throughout' : "you're fine with a little variation";
+  return `You told us you'd like ${vis}, ${ch}, and ${ev}. ${WOOD_WHY[key]}`;
+}
+const ADDONS = [
+  {key:'giftbox', name:'Gift box packaging', up:8,  icon:'🎁', desc:'Arrives ready-to-give in a branded gift box.'},
+  {key:'oil',     name:'Board conditioning oil', up:12, icon:'🧴', desc:'Food-safe oil to keep the wood rich for years.'},
+  {key:'feet',    name:'Rubber grip feet', up:6,  icon:'⚫', desc:'Non-slip feet so it stays put on the counter.'},
+  {key:'groove',  name:'Juice groove', up:9,  icon:'🌊', desc:'A carved channel that catches juices when carving.'},
+  {key:'note',    name:'Handwritten gift note', up:0, icon:'✍️', desc:"We'll hand-write your message on a card."},
+];
+/* ---- board mockup (wood texture + engraving preview) ---- */
+const WOOD_MOCK = {
+  Bamboo:  {base:'#dabf8e', grain:'#c4a468', eng:'#4c3820', engOp:.82, tex:'bamboo'},
+  Cherry:  {base:'#b26a45', grain:'#8f5232', eng:'#3f2212', engOp:.80, tex:'streaks'},
+  Walnut:  {base:'#5b4030', grain:'#453020', eng:'#b7a084', engOp:.62, tex:'knots'},
+  Mahogany:{base:'#8b4634', grain:'#6b2f21', eng:'#361610', engOp:.82, tex:'clean'},
+};
+const WOOD_MOCK_NEUTRAL = {base:'#cdb187', grain:'#b6996b', eng:'#5a4630', engOp:.5, tex:'clean'};
+let _mk=0;
+function _lighten(hex,a){ const n=parseInt(hex.slice(1),16); const r=Math.min(255,(n>>16)+a),g=Math.min(255,((n>>8)&255)+a),b=Math.min(255,(n&255)+a); return '#'+((r<<16)|(g<<8)|b).toString(16).padStart(6,'0'); }
+function _texture(m,shape){
+  const g=m.grain;
+  if(m.tex==='bamboo'){
+    let s='<g opacity=".55" stroke="'+g+'" stroke-width="2" fill="none">';
+    for(const x of [78,134,190,246]) s+=`<line x1="${x}" y1="0" x2="${x}" y2="220"/>`;
+    s+='</g>';
+    // uneven pressed-strip tones
+    s+=`<g><rect x="78" y="0" width="56" height="220" fill="#000" opacity=".05"/><rect x="190" y="0" width="56" height="220" fill="#fff" opacity=".05"/><rect x="246" y="0" width="60" height="220" fill="#000" opacity=".06"/></g>`;
+    return s;
+  }
+  if(m.tex==='knots'){
+    let s='<g opacity=".4" stroke="'+g+'" stroke-width="2.4" fill="none">';
+    s+='<path d="M6 74 Q150 62 296 78"/><path d="M6 112 Q150 124 296 106"/><path d="M6 150 Q150 140 296 156"/></g>';
+    s+=`<g><ellipse cx="96" cy="152" rx="13" ry="8" fill="${g}" opacity=".7"/><ellipse cx="96" cy="152" rx="6" ry="4" fill="#2c1e12" opacity=".55"/><ellipse cx="212" cy="70" rx="10" ry="6" fill="${g}" opacity=".6"/></g>`;
+    return s;
+  }
+  if(m.tex==='streaks'){
+    return '<g opacity=".4" stroke="'+g+'" stroke-width="2.2" fill="none"><path d="M6 78 Q150 70 296 82"/><path d="M6 116 Q150 124 296 110"/><path d="M6 150 Q150 146 296 154"/></g>'
+         + '<path d="M40 30 Q120 110 60 196" stroke="'+g+'" stroke-width="3" fill="none" opacity=".28"/>';
+  }
+  // clean
+  return '<g opacity=".3" stroke="'+g+'" stroke-width="2" fill="none"><path d="M6 80 Q150 72 296 84"/><path d="M6 116 Q150 122 296 112"/><path d="M6 150 Q150 146 296 152"/></g>';
+}
+function _engraving(lines,m,shape){
+  if(!lines||!lines.length) return '';
+  const cx = shape==='With Handle'?126:150;
+  const arr = lines.slice(0,3);
+  const sizes = arr.length===1?[48]:arr.length===2?[44,23]:[36,20,20];
+  const gap=7, total=sizes.reduce((a,b)=>a+b,0)+gap*(arr.length-1);
+  let y=110-total/2, out='';
+  arr.forEach((ln,i)=>{
+    y += sizes[i]*0.76;
+    out += `<text x="${cx}" y="${y.toFixed(1)}" text-anchor="middle" font-family="'Great Vibes', cursive" font-size="${sizes[i]}" fill="${m.eng}" fill-opacity="${m.engOp}">${esc(ln)}</text>`;
+    y += sizes[i]*0.24 + gap;
+  });
+  return out;
+}
+function boardMockup(woodKey, shape, lines){
+  const m = woodKey ? (WOOD_MOCK[woodKey]||WOOD_MOCK_NEUTRAL) : WOOD_MOCK_NEUTRAL;
+  shape = shape||'Square';
+  const id='mk'+(++_mk);
+  let clip, hole='';
+  if(shape==='Round'){ clip='<ellipse cx="150" cy="110" rx="98" ry="92"/>'; }
+  else if(shape==='With Handle'){ clip='<rect x="20" y="36" width="212" height="148" rx="16"/><rect x="228" y="95" width="58" height="30" rx="13"/>'; hole='<circle cx="268" cy="110" r="6" fill="#faf5ee"/>'; }
+  else { clip='<rect x="22" y="26" width="256" height="168" rx="16"/>'; }
+  return `<svg class="mockup" viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <linearGradient id="${id}g" x1="0" y1="0" x2="0.2" y2="1">
+        <stop offset="0" stop-color="${_lighten(m.base,14)}"/>
+        <stop offset="0.5" stop-color="${m.base}"/>
+        <stop offset="1" stop-color="${m.grain}"/>
+      </linearGradient>
+      <clipPath id="${id}c">${clip}</clipPath>
+    </defs>
+    <g clip-path="url(#${id}c)">
+      <rect x="0" y="0" width="300" height="220" fill="url(#${id}g)"/>
+      ${_texture(m,shape)}
+      ${_engraving(lines,m,shape)}
+      <rect x="0" y="0" width="300" height="220" fill="#fff" opacity=".05"/>
+    </g>
+    <g fill="none" stroke="rgba(55,38,24,.28)" stroke-width="2.5">${clip}</g>
+    ${hole}
+  </svg>`;
+}
+const SIZES = [
+  {name:'Ex-Small 5×11″', base:21, use:'Bar board — lemons, limes & garnish'},
+  {name:'Small 7×13″',    base:25, use:'Cheese & crackers for two'},
+  {name:'Medium 8×15″',   base:29, use:'Our most-gifted size', pop:true},
+  {name:'Medium 9×12″',   base:29, use:'Classic kitchen prep'},
+  {name:'Narrow 6×15″',   base:27, use:'Baguettes & long serves'},
+  {name:'Large 10×15″',   base:35, use:'Family charcuterie nights'},
+  {name:'Large 10.5×16″', base:39, use:'The statement piece'},
+];
+const STYLES = [
+  {key:'With Handle', shape:'handle', pop:true, desc:'A paddle-style handle to hang or carry it by. Our most-gifted shape.'},
+  {key:'Square',      shape:'square', desc:'Clean straight edges — the classic rectangular board.'},
+  {key:'Round',       shape:'round',  desc:'A soft circular board, lovely for cheese & charcuterie.'},
+];
+const THEMES = [
+  ['all','All designs'],['wedding','Wedding & Couples'],['home','Home & Family'],
+  ['monogram','Monograms'],['mom','Mom & Grandma'],['dad','For Dad'],['fun','Just for Fun']
+];
+let themeFilter='all';
+
+function customizeFromCard(i){ startCustomizer(C.products[i].handle, true); }
+function startCustomizer(handle, fromResults){
+  // wood-first: always begin at step 1. If a specific design was chosen from a
+  // gift result, preselect it so it's already highlighted on the Design step.
+  const design = handle ? C.boards.find(b=>b.handle===handle) : null;
+  state.cust = { step:1, woodQuizDone:false, woodPrefs:null, wood:null, style:null, size:null, design, fields:{}, addons:{}, fromResults:!!fromResults };
+  themeFilter = (!design && state.occasion && ['wedding','mom','dad'].includes(state.occasion)) ? state.occasion
+              : (!design && state.occasion==='housewarming') ? 'home' : 'all';
+  go('cust');
+}
+function custBack(){
+  const c=state.cust;
+  if(c.step>1){ c.step--; renderCust(); window.scrollTo({top:0}); }
+  else go(c.fromResults ? 'results' : 'home');
+}
+function custNext(){ state.cust.step++; renderCust(); window.scrollTo({top:0}); }
+
+const STEP_NAMES = ['Wood','Style','Size','Design','Engraving','Add-ons','Review'];
+const STEP_TOTAL = STEP_NAMES.length;
+function renderCust(){
+  const c=state.cust;
+  $('cust-steps').innerHTML = STEP_NAMES.map((n,i)=>{
+    const s=i+1;
+    return `<span class="step ${s<c.step?'done':''} ${s===c.step?'now':''}"><span class="n">${s<c.step?'✓':s}</span>${n}</span>`;
+  }).join('');
+  [renderWoodStep,renderStyleStep,renderSizeStep,renderDesignStep,renderEngravingStep,renderAddonsStep,renderReviewStep][c.step-1]();
+  renderSummary();
+}
+function setHead(e,t,s){ $('cust-eyebrow').textContent=e; $('cust-title').textContent=t; $('cust-sub').textContent=s; }
+function priceOf(sizeName,woodKey){
+  const s=SIZES.find(x=>x.name===sizeName), w=WOODS.find(x=>x.key===woodKey);
+  return (s?s.base:21)+(w?w.up:0);
+}
+function previewLines(c){
+  if(c.design){ const typed=c.design.fields.map(f=>c.fields[f.k]).filter(Boolean); if(typed.length) return typed;
+    return c.design.fields.map(f=>f.ph).filter(Boolean).slice(0,2); }
+  return ['The Smiths','est. 2024'];
+}
+function addonTotal(c){ return ADDONS.reduce((sum,a)=> sum + (c.addons[a.key]?a.up:0), 0); }
+function totalPrice(c){ return (c.size&&c.wood) ? priceOf(c.size,c.wood)+addonTotal(c) : null; }
+
+/* --- step 4: design (engraving artwork) --- */
+function renderDesignStep(){
+  setHead('Build your board · Step 4 of '+STEP_TOTAL,'Pick a design you love','This is the engraving artwork — your names and details replace the sample text shown.');
+  const pool = C.boards.filter(b=>themeFilter==='all'||b.theme===themeFilter);
+  $('cust-body').innerHTML = `
+    <div class="chips left">${THEMES.map(([k,l])=>
+      `<button class="chip ${themeFilter===k?'on':''}" onclick="themeFilter='${k}';renderCust()">${l}</button>`).join('')}</div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr));margin-top:22px">
+      ${pool.map(b=>`
+        <button class="opt ${state.cust.design===b?'selected':''}" onclick="pickDesign('${b.handle}')">
+          ${b.best?'<span class="badge best">Best Seller</span>':''}
+          <div class="oimg" style="background-image:url('${b.img}')"></div>
+          <div class="obody"><h4 style="font-size:.9rem">${esc(b.title)}</h4></div>
+        </button>`).join('')}
+    </div>`;
+}
+function pickDesign(handle){ state.cust.design=C.boards.find(b=>b.handle===handle); custNext(); }
+
+/* --- step 1: wood (quiz first, then recommend) --- */
+function renderWoodStep(){
+  const c=state.cust;
+  if(!c.woodQuizDone){
+    setHead('Build your board · Step 1 of '+STEP_TOTAL,'Start with the wood',"First, a few quick questions and we'll point you to the wood that fits you best.");
+    renderWoodQuiz(); return;
+  }
+  setHead('Build your board · Step 1 of '+STEP_TOTAL,'Choose your wood','Here they are — the honest good and not-so-good of each. Pick whichever you love.');
+  // rank by quiz score if taken
+  let woods = WOODS.slice(), topKey=null, secondKey=null, rec='';
+  if(c.woodPrefs){
+    const s = scoreWoods(c.woodPrefs);
+    woods.sort((a,b)=> (s[b.key]-s[a.key]) || (WOODS.indexOf(a)-WOODS.indexOf(b)));
+    topKey = woods[0].key;
+    secondKey = woods[1].key;
+    rec = `<div class="woodrec">
+      <div class="rt">✨ Your best match: ${topKey}</div>
+      <div class="rd">${recReason(c.woodPrefs,topKey)}</div>
+      <div class="rd2">👍 A close second: <strong>${secondKey}</strong> — ${WOOD_WHY[secondKey]}</div>
+      <span class="retake" onclick="retakeWoodQuiz()">↻ Answer the questions again</span>
+    </div>`;
+  }
+  $('cust-body').innerHTML = rec + `<div class="woodgrid">${woods.map(w=>{
+    const sel = c.wood===w.key;
+    const ck = w.contrast==='High'?'high':'low';
+    const badge = w.key===topKey ? '<span class="badge match">★ Your match</span>'
+                : w.key===secondKey ? '<span class="badge second">2nd choice</span>'
+                : (w.pop ? '<span class="badge pop">Most Popular</span>' : '');
+    return `<div class="opt wood woodcard ${sel?'selected':''}" onclick="pickWood('${w.key}')">
+      ${badge}
+      <div class="woodpreview">${boardMockup(w.key,'With Handle',['Smith','est. 2024'])}<div class="mocklabel">Sample engraving on ${w.key.toLowerCase()}</div></div>
+      <div class="obody">
+        <h4>${w.key}<span class="contrast ${ck}">Engraving: ${w.contrast}</span></h4>
+        <div class="blurb">${w.blurb}</div>
+        <ul class="prosconlist">${w.pros.map(p=>`<li class="pro">${p}</li>`).join('')}</ul>
+        <div class="conhead">Good to know</div>
+        <ul class="prosconlist">${w.cons.map(x=>`<li class="con">${x}</li>`).join('')}</ul>
+        <div class="price">${w.up===0?'Included in base price':'+ $'+w.up}</div>
+        <button class="pickbtn" onclick="event.stopPropagation();pickWood('${w.key}')">${sel?'✓ Selected':'Choose '+w.key+' →'}</button>
+      </div>
+    </div>`;}).join('')}</div>`;
+}
+function renderWoodQuiz(){
+  const p = state.cust.woodPrefs || {};
+  const done = WOOD_Q.every(q=>p[q.k]);
+  $('cust-body').innerHTML = `<div class="quiz">
+    ${WOOD_Q.map(q=>`<div class="qgroup">
+      <div class="qq">${q.q}</div>
+      <div class="qopts">${q.opts.map(([v,l])=>
+        `<button class="qopt ${p[q.k]===v?'on':''}" onclick="setWoodPref('${q.k}','${v}')">${l}</button>`).join('')}</div>
+    </div>`).join('')}
+    <div class="navrow">
+      <button class="btn btn-copper btn-big" ${done?'':'disabled'} onclick="finishWoodQuiz()">Show my wood match →</button>
+      <button class="btn btn-ghost btn-big" onclick="skipWoodQuiz()">Skip — just show all woods</button>
+    </div>
+  </div>`;
+}
+function setWoodPref(k,v){ (state.cust.woodPrefs = state.cust.woodPrefs||{})[k]=v; renderWoodQuiz(); }
+function finishWoodQuiz(){ state.cust.woodQuizDone=true; renderCust(); window.scrollTo({top:0}); }
+function skipWoodQuiz(){ state.cust.woodQuizDone=true; state.cust.woodPrefs=null; renderCust(); window.scrollTo({top:0}); }
+function retakeWoodQuiz(){ state.cust.woodQuizDone=false; renderCust(); window.scrollTo({top:0}); }
+function pickWood(key){ state.cust.wood=key; custNext(); }
+
+/* --- step 2: style / shape --- */
+function renderStyleStep(){
+  const c=state.cust;
+  setHead('Build your board · Step 2 of '+STEP_TOTAL,'Pick the shape','Round, square, or a paddle with a handle — it changes the whole look.');
+  $('cust-body').innerHTML = `<div class="stylegrid">${STYLES.map(s=>`
+    <div class="opt stylecard ${c.style===s.key?'selected':''}" onclick="pickStyle('${s.key}')">
+      ${s.pop?'<span class="badge pop">Most Gifted</span>':''}
+      <div class="shape ${s.shape}"></div>
+      <h4>${s.key}</h4>
+      <div class="osub">${s.desc}</div>
+    </div>`).join('')}</div>`;
+}
+function pickStyle(key){ state.cust.style=key; custNext(); }
+
+/* --- step 3: size --- */
+function renderSizeStep(){
+  const c=state.cust;
+  setHead('Build your board · Step 3 of '+STEP_TOTAL,'Choose the size',"Not sure? Medium 8×15″ is our most-gifted size. Prices include your "+c.wood+" wood.");
+  $('cust-body').innerHTML = `
+    <div class="sizesec">
+      ${SIZES.map(s=>`
+        <button class="sizeopt ${c.size===s.name?'selected':''}" onclick="pickSize('${s.name.replace(/'/g,"\\'")}')">
+          <span><span class="sname">${s.name}</span>${s.pop?' <span class="badge pop" style="position:static;display:inline-block">Most Gifted</span>':''}<br><span class="suse">${s.use}</span></span>
+          <span class="sprice">$${priceOf(s.name,c.wood)}</span>
+        </button>`).join('')}
+    </div>`;
+}
+function pickSize(name){ state.cust.size=name; custNext(); }
+
+/* --- step 5: engraving text --- */
+function renderEngravingStep(){
+  const c=state.cust;
+  if(!c.design){ c.step=4; return renderCust(); }
+  setHead('Build your board · Step 5 of '+STEP_TOTAL,'Add the engraving',"Type exactly what you'd like engraved — we'll follow it to the letter.");
+  $('cust-body').innerHTML = `<div class="fieldwrap">
+    ${c.design.fields.map(f=>`
+      <div class="field">
+        <label>${f.label}</label>
+        <input type="text" placeholder="${esc(f.ph)}" value="${esc(c.fields[f.k]||'')}"
+          oninput="state.cust.fields['${f.k}']=this.value;renderSummary()">
+        <div class="hint">Example: ${esc(f.ph)}</div>
+      </div>`).join('')}
+    <div class="navrow"><button class="btn btn-copper btn-big" onclick="custNext()">Continue to add-ons →</button></div>
+  </div>`;
+}
+
+/* --- step 6: add-ons --- */
+function renderAddonsStep(){
+  const c=state.cust;
+  setHead('Build your board · Step 6 of '+STEP_TOTAL,'Finishing touches',"Optional extras — tap any you'd like, or skip straight to review.");
+  $('cust-body').innerHTML = `<div class="addongrid">${ADDONS.map(a=>{
+    const on=!!c.addons[a.key];
+    return `<button class="addon ${on?'on':''}" onclick="toggleAddon('${a.key}')">
+      <span class="aicon">${a.icon}</span>
+      <span class="check">${on?'✓':''}</span>
+      <span><span class="aname">${a.name}</span><br><span class="adesc">${a.desc}</span></span>
+      <span class="aprice">${a.up===0?'Free':'+ $'+a.up}</span>
+    </button>`;}).join('')}</div>
+    <div class="navrow">
+      <button class="btn btn-copper btn-big" onclick="custNext()">Review my board →</button>
+      <button class="btn btn-ghost btn-big" onclick="custNext()">Skip — no extras</button>
+    </div>`;
+}
+function toggleAddon(key){ const a=state.cust.addons; a[key]=!a[key]; renderCust(); }
+
+/* --- step 7: review --- */
+function renderReviewStep(){
+  const c=state.cust;
+  setHead('Build your board · Step 7 of '+STEP_TOTAL,"Here's their gift.",'One last look before it heads to the workshop.');
+  const lines = c.design.fields.map(f=>c.fields[f.k]).filter(Boolean);
+  const chosen = ADDONS.filter(a=>c.addons[a.key]);
+  const addonRow = chosen.length
+    ? `<div class="srow"><span class="k">Add-ons</span><span class="v">${chosen.map(a=>esc(a.name)+(a.up?` (+$${a.up})`:'')).join('<br>')}</span></div>` : '';
+  $('cust-body').innerHTML = `
+    <div class="review">
+      <div class="rimg">${boardMockup(c.wood, c.style, previewLines(c))}</div>
+      <div class="srow"><span class="k">Wood</span><span class="v">${c.wood}</span></div>
+      <div class="srow"><span class="k">Shape</span><span class="v">${c.style}</span></div>
+      <div class="srow"><span class="k">Size</span><span class="v">${c.size}</span></div>
+      <div class="srow"><span class="k">Design</span><span class="v">${esc(c.design.title)}</span></div>
+      <div class="srow"><span class="k">Engraving</span><span class="v">${lines.length?esc(lines.join(' · ')):'—'}</span></div>
+      ${addonRow}
+      <div class="stotal"><span>Estimated total</span><span class="amt">$${totalPrice(c)}</span></div>
+      <div class="navrow">
+        <a class="btn btn-copper btn-big" href="${PRODUCT_URL(c.design.handle)}" target="_blank" rel="noopener">Add to cart on copperfoxco.com ↗</a>
+        <button class="btn btn-ghost btn-big" onclick="startCustomizer(null,false)">Start a new board</button>
+      </div>
+    </div>
+    <div class="note">💡 <strong>How the live site will work:</strong> this button will drop the exact board — wood, shape, size, design, engraving, and add-ons — straight into the cart, so your customer never re-types a thing. Prices here are estimates; the live version pulls real prices at checkout.</div>`;
+}
+
+/* --- running summary sidebar --- */
+function renderSummary(){
+  const c=state.cust;
+  const lines = c.design ? c.design.fields.map(f=>c.fields[f.k]).filter(Boolean) : [];
+  const chosen = ADDONS.filter(a=>c.addons[a.key]);
+  const total = totalPrice(c)!=null ? '$'+totalPrice(c) : '—';
+  $('cust-summary').innerHTML = `
+    <h5>Your board so far</h5>
+    <div class="sumgrid">
+      <div class="simg">${boardMockup(c.wood, c.style, previewLines(c))}</div>
+      <div class="sumdetails">
+        <div class="srow"><span class="k">Wood</span><span class="v">${c.wood||'—'}</span></div>
+        <div class="srow"><span class="k">Shape</span><span class="v">${c.style||'—'}</span></div>
+        <div class="srow"><span class="k">Size</span><span class="v">${c.size||'—'}</span></div>
+        <div class="srow"><span class="k">Design</span><span class="v">${c.design?esc(c.design.title):'—'}</span></div>
+        <div class="srow"><span class="k">Engraving</span><span class="v">${lines.length?esc(lines.join(' · ')):'—'}</span></div>
+        ${chosen.length?`<div class="srow"><span class="k">Add-ons</span><span class="v">${chosen.map(a=>esc(a.name)).join('<br>')}</span></div>`:''}
+        <div class="stotal"><span>Est. total</span><span class="amt">${total}</span></div>
+        <div class="snote">Personalization is always included. Final price confirmed at checkout.</div>
+      </div>
+    </div>`;
+}
+
+/* ============================ PERSONAL SHOPPER ============================ */
+const shopper = { interp:null, offset:0 };
+const SHOP_BATCH = 4;
+const OCC_KW = [
+  {occ:'wedding',      words:['wedding','bride','groom','engagement','engaged','bridal','marriage','fiance','fiancé','fiancée','newlywed','couple getting married']},
+  {occ:'housewarming', words:['housewarming','house warming','new home','new house','new place','first apartment','first home','just moved','moving','realtor','real estate','closing gift','new homeowner']},
+  {occ:'mom',          words:['mom','mother','grandma','grandmother','nana','mum','mommy',"mother's day",'mothers day']},
+  {occ:'dad',          words:['dad','father','grandpa','grandfather','papa','grill','grilling',"father's day",'fathers day']},
+  {occ:'graduation',   words:['graduation','graduate','graduating','college grad','diploma','class of']},
+  {occ:'birthday',     words:['birthday','bday','b-day','turning ']},
+  {occ:'anniversary',  words:['anniversary','valentine','husband','wife','spouse','partner']},
+  {occ:'thankyou',     words:['thank you','thankyou','thank-you','teacher','coworker','co-worker','colleague','boss','client','admin','assistant','appreciation','retirement','retiring','retire','hostess','mentor','nurse','volunteer','employee']},
+  {occ:'baby',         words:['baby','newborn','new parents','christening','nursery','expecting','pregnant','baby shower']},
+  {occ:'memorial',     words:['memorial','sympathy','loss','passed away','grief','grieving','remembrance','funeral','condolence','in memory','pet loss']},
+];
+const TYPE_KW = [
+  {type:'Wooden Cutting Board', words:['cutting board','charcuterie','serving board','chopping board','cheese board']},
+  {type:'Candles',        words:['candle']},
+  {type:'Picture Frames', words:['frame','photo','picture']},
+  {type:'Coasters',       words:['coaster']},
+  {type:'Serving Trays',  words:['tray','platter']},
+  {type:'Journals',       words:['journal','notebook','recipe book','diary']},
+  {type:'Dish Towels',    words:['towel','tea towel','dish towel']},
+];
+const OCC_PHRASE = {wedding:'a wedding gift',housewarming:'a new-home gift',mom:'a gift for Mom or Grandma',dad:'a gift for Dad',graduation:'a graduation gift',birthday:'a birthday gift',anniversary:'an anniversary gift',thankyou:'a thank-you gift',baby:'a new-baby gift',memorial:'a sympathy gift'};
+const TYPE_PHRASE = {'Wooden Cutting Board':'a cutting board','Candles':'a candle','Picture Frames':'a frame','Coasters':'coasters','Serving Trays':'a serving tray','Journals':'a journal','Dish Towels':'a dish towel'};
+
+function interpret(text){
+  const t = ' '+text.toLowerCase()+' ';
+  let occ=null; for(const g of OCC_KW){ if(g.words.some(w=>t.includes(w))){ occ=g.occ; break; } }
+  let type=null; for(const g of TYPE_KW){ if(g.words.some(w=>t.includes(w))){ type=g.type; break; } }
+  let budget=null;
+  const nums=(text.match(/\$?\s?\d{1,4}/g)||[]).map(x=>parseInt(x.replace(/\D/g,''),10)).filter(n=>n>0&&n<2000);
+  if(/under|below|less than|up to| max/.test(t) && nums.length) budget=[0,Math.max(...nums)];
+  else if(/over|above|at least|more than|starting at/.test(t) && nums.length) budget=[Math.min(...nums),9999];
+  else if(nums.length>=2) budget=[Math.min(...nums),Math.max(...nums)];
+  else if(nums.length===1){ const n=nums[0]; budget=/around|about|~|near|ish/.test(t)?[Math.max(0,n-15),n+10]:[0,n]; }
+  if(!budget){
+    if(/cheap|affordable|inexpensive|budget|small gift|little gift/.test(t)) budget=[0,25];
+    else if(/splurge|luxur|high[- ]end|really nice|something special|best you have|go all out|nicest|top of/.test(t)) budget=[50,9999];
+  }
+  return {occ,type,budget};
+}
+function shopperPool(intp){
+  let pool=C.products.slice();
+  if(intp.type) pool=pool.filter(p=>p.type===intp.type);
+  if(intp.occ)  pool=pool.filter(p=>p.occ.includes(intp.occ));
+  if(intp.budget){ const [lo,hi]=intp.budget; pool=pool.filter(p=>p.min>=lo-0.01 && p.min<=hi); }
+  pool.sort((a,b)=>(b.giftbox*2+b.best)-(a.giftbox*2+a.best)||a.min-b.min);
+  const byType={}; pool.forEach(p=>{(byType[p.type]=byType[p.type]||[]).push(p);});
+  const types=Object.keys(byType),mixed=[];
+  for(let r=0;mixed.length<pool.length;r++)for(const ty of types)if(byType[ty][r])mixed.push(byType[ty][r]);
+  return mixed;
+}
+function intpSummary(intp){
+  const parts=[];
+  if(intp.occ&&OCC_PHRASE[intp.occ]) parts.push(OCC_PHRASE[intp.occ]);
+  if(intp.type&&TYPE_PHRASE[intp.type]) parts.push(TYPE_PHRASE[intp.type]);
+  if(intp.budget){ const [lo,hi]=intp.budget; parts.push(hi>=9999?('over $'+lo):(lo<=0?('under $'+hi):('around $'+lo+'–$'+hi))); }
+  return parts;
+}
+
+const QUICK=['A wedding gift under $50','Housewarming for a friend','Something for Mom','A retirement gift for my boss','Graduation gift under $30'];
+function renderQuickChips(){ $('chatquick').innerHTML = QUICK.map(q=>`<button class="qchip" onclick="quickChat(this.textContent)">${q}</button>`).join(''); }
+function startShopper(){
+  go('shopper');
+  $('chatlog').innerHTML=''; shopper.interp=null; shopper.offset=0;
+  botSay("Hi! I'm your Copper Fox gift guide. 🦊 Tell me who you're shopping for and the occasion — plus a budget if you have one — and I'll find a few perfect gifts.");
+  renderQuickChips();
+  setTimeout(()=>{ const f=$('chatfield'); if(f) f.focus(); },60);
+}
+function quickChat(q){ $('chatfield').value=q; sendChat(); }
+function scrollChat(){ window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'}); }
+function userSay(text){ const d=document.createElement('div'); d.className='msg user'; d.textContent=text; $('chatlog').appendChild(d); scrollChat(); }
+function botSay(html){ const d=document.createElement('div'); d.className='msg bot'; d.innerHTML=html; $('chatlog').appendChild(d); scrollChat(); }
+function botCards(list){
+  const d=document.createElement('div'); d.className='chatcards';
+  d.innerHTML=list.map(p=>{
+    const i=C.products.indexOf(p), isBoard=p.type==='Wooden Cutting Board';
+    const badge=p.giftbox?'<span class="cbadge box">Gift Box</span>':(p.best?'<span class="cbadge best">Best Seller</span>':'');
+    const price=p.min===p.max?('$'+p.min):('from $'+p.min);
+    return `<div class="ccard" onclick="${isBoard?`customizeFromCard(${i})`:`openModal(${i})`}">
+      <div class="cimg" style="background-image:url('${p.img}')">${badge}</div>
+      <div class="cb"><h4>${esc(p.title)}</h4><div class="price">${price}</div></div></div>`;
+  }).join('');
+  $('chatlog').appendChild(d); scrollChat();
+}
+function botRefine(){
+  const d=document.createElement('div'); d.className='refinechips';
+  d.innerHTML=`<button class="rfchip" onclick="shopMore()">Show me more</button>
+    <button class="rfchip" onclick="shopCheaper()">A little cheaper</button>
+    <button class="rfchip" onclick="shopNicer()">Something nicer</button>
+    <button class="rfchip" onclick="startShopper()">Start over</button>`;
+  $('chatlog').appendChild(d); scrollChat();
+}
+function sendChat(){
+  const f=$('chatfield'); const text=(f.value||'').trim(); if(!text) return;
+  f.value=''; userSay(text);
+  shopper.interp=interpret(text); shopper.offset=0;
+  respondShopper(true);
+}
+function respondShopper(first){
+  const intp=shopper.interp;
+  // nothing recognized — ask for more, but offer a few favorites to get going
+  if(!(intp.occ||intp.type||intp.budget)){
+    botSay("I want to get this just right — who's it for, or what's the occasion? Try <strong>wedding</strong>, <strong>new home</strong>, <strong>a teacher</strong>, <strong>Mom</strong>, or <strong>graduation</strong>. In the meantime, here are a few of our favorites:");
+    botCards(shopperPool({}).slice(0,SHOP_BATCH));
+    return;
+  }
+  const pool=shopperPool(intp);
+  if(!pool.length){
+    botSay("I couldn't find one in that budget. Try telling me a new price, or tap <strong>Start over</strong> to begin again.");
+    return;
+  }
+  const parts=intpSummary(intp);
+  const lead=parts.length?`Perfect — ${parts.join(', ')}. Here ${pool.length>1?'are':'is'} my top pick${pool.length>1?'s':''}:`:'Here are some of our most-loved gifts:';
+  botSay(first?lead:'A few more ideas:');
+  botCards(pool.slice(shopper.offset,shopper.offset+SHOP_BATCH));
+  botSay('Do any of these feel right? Tap one to personalize it — or nudge me:');
+  botRefine();
+}
+function shopMore(){
+  shopper.offset+=SHOP_BATCH;
+  const pool=shopperPool(shopper.interp);
+  if(shopper.offset>=pool.length){ shopper.offset=Math.max(0,pool.length-SHOP_BATCH); botSay("That's everything I've got for that one! Want a different occasion or budget? Tap <strong>Start over</strong>, or just type a new search."); return; }
+  botSay('A few more ideas:'); botCards(pool.slice(shopper.offset,shopper.offset+SHOP_BATCH)); botRefine();
+}
+function shopCheaper(){
+  const b=shopper.interp.budget; const cap=b?Math.max(15,Math.round((b[1]>=9999?60:b[1])*0.6)):25;
+  shopper.interp.budget=[0,cap]; shopper.offset=0;
+  const pool=shopperPool(shopper.interp);
+  if(!pool.length){ botSay(`Hmm, I don't have one under $${cap} for this — want to nudge it back up?`); return; }
+  botSay(`Sure — keeping it under $${cap}:`); botCards(pool.slice(0,SHOP_BATCH)); botRefine();
+}
+function shopNicer(){
+  shopper.interp.budget=[45,9999]; shopper.offset=0;
+  const pool=shopperPool(shopper.interp);
+  if(!pool.length){ botSay("I don't have a pricier option for that one — want to try a different gift?"); return; }
+  botSay("Ooh, let's find something special:"); botCards(pool.slice(0,SHOP_BATCH)); botRefine();
+}
+
+/* ============================ INIT ============================ */
+renderOccasions();
+</script>
+</body>
+</html>
