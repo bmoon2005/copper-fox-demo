@@ -127,15 +127,14 @@
   .badge.box{background:var(--green)}
   .badge.pop{background:var(--gold)}
 
-  /* occasion tile */
-  .occ-emoji{font-size:1.15rem;margin-right:5px}
-
   /* chips */
   .chips{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:22px}
   .chips.left{justify-content:flex-start}
   .chip{background:#fff;border:1.6px solid var(--line);border-radius:22px;padding:8px 17px;font-size:.87rem;font-weight:800;color:var(--ink);transition:.14s}
   .chip:hover{border-color:var(--copper);color:var(--copper-dark)}
   .chip.on{background:var(--copper);border-color:var(--copper);color:#fff}
+  .chips.occ{gap:11px;margin-top:32px}
+  .chips.occ .chip{font-size:.98rem;padding:12px 22px}
   .subhead{text-align:center;margin-top:44px}
   .subhead .plabel{font-size:.76rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
 
@@ -374,7 +373,7 @@
     <span class="eyebrow">Step 1 · The occasion</span>
     <h1>Who or what are we celebrating?</h1>
     <p class="sub">Choose an occasion and we'll pull together our best gift ideas for it — no endless scrolling.</p>
-    <div class="grid" id="occ-grid"></div>
+    <div class="chips occ" id="occ-grid"></div>
     <div class="subhead"><span class="plabel">Or shop by who it's for</span></div>
     <div class="chips" id="person-chips"></div>
   </section>
@@ -439,18 +438,6 @@ function go(screen){
 }
 
 /* ============================ OCCASIONS ============================ */
-const OCC_META = {
-  wedding:      {emoji:'💍', sub:'Engagements, showers & the big day'},
-  housewarming: {emoji:'🏡', sub:'New homes & first apartments'},
-  mom:          {emoji:'🌷', sub:"Mother's Day, birthdays & just because"},
-  dad:          {emoji:'🪓', sub:"Father's Day & the grill master"},
-  graduation:   {emoji:'🎓', sub:'High school, college & beyond'},
-  birthday:     {emoji:'🎂', sub:"Something they'll actually keep"},
-  anniversary:  {emoji:'❤️', sub:"Anniversaries & Valentine's Day"},
-  thankyou:     {emoji:'🤝', sub:'Teachers, realtors, clients & admin day'},
-  baby:         {emoji:'👶', sub:'New babies & grandparents-to-be'},
-  memorial:     {emoji:'🕊️', sub:'Sympathy & remembrance, gently done'},
-};
 // order occasions by how many gifts back them (richest first), then a sensible tail
 const OCC_ORDER = ['wedding','housewarming','birthday','mom','thankyou','anniversary','graduation','dad','baby','memorial'];
 const PERSONS = [
@@ -465,17 +452,8 @@ function occPhoto(key){
   return best ? best.img : '';
 }
 function renderOccasions(){
-  $('occ-grid').innerHTML = OCC_ORDER.filter(k=>C.occasions[k]).map(key=>{
-    const def=C.occasions[key], m=OCC_META[key]||{emoji:'🎁',sub:''};
-    const n = C.products.filter(p=>p.occ.includes(key)).length;
-    return `<button class="opt" onclick="pickOccasion('${key}')">
-      <div class="oimg" style="background-image:url('${occPhoto(key)}')"></div>
-      <div class="obody">
-        <h4><span class="occ-emoji">${m.emoji}</span>${def.label}</h4>
-        <div class="osub">${m.sub}</div>
-        <div class="price">${n} gift ideas →</div>
-      </div></button>`;
-  }).join('');
+  $('occ-grid').innerHTML = OCC_ORDER.filter(k=>C.occasions[k]).map(key=>
+    `<button class="chip" onclick="pickOccasion('${key}')">${C.occasions[key].label}</button>`).join('');
   $('person-chips').innerHTML = PERSONS.map(([label,key])=>
     `<button class="chip" onclick="pickOccasion('${key}')">${label}</button>`).join('');
 }
@@ -615,11 +593,11 @@ function recReason(p,key){
   return `You told us you'd like ${vis}, ${ch}, and ${ev}. ${WOOD_WHY[key]}`;
 }
 const ADDONS = [
-  {key:'giftbox', name:'Gift box packaging', up:8,  icon:'🎁', desc:'Arrives ready-to-give in a branded gift box.'},
-  {key:'oil',     name:'Board conditioning oil', up:12, icon:'🧴', desc:'Food-safe oil to keep the wood rich for years.'},
-  {key:'feet',    name:'Rubber grip feet', up:6,  icon:'⚫', desc:'Non-slip feet so it stays put on the counter.'},
-  {key:'groove',  name:'Juice groove', up:9,  icon:'🌊', desc:'A carved channel that catches juices when carving.'},
-  {key:'note',    name:'Handwritten gift note', up:0, icon:'✍️', desc:"We'll hand-write your message on a card."},
+  {key:'giftbox', name:'Gift box packaging', up:8,  desc:'Arrives ready-to-give in a branded gift box.'},
+  {key:'oil',     name:'Board conditioning oil', up:12, desc:'Food-safe oil to keep the wood rich for years.'},
+  {key:'feet',    name:'Rubber grip feet', up:6,  desc:'Non-slip feet so it stays put on the counter.'},
+  {key:'groove',  name:'Juice groove', up:9,  desc:'A carved channel that catches juices when carving.'},
+  {key:'note',    name:'Handwritten gift note', up:0, desc:"We'll hand-write your message on a card."},
 ];
 /* ---- board mockup (wood texture + engraving preview) ---- */
 const WOOD_MOCK = {
@@ -790,9 +768,9 @@ function renderWoodStep(){
     topKey = woods[0].key;
     secondKey = woods[1].key;
     rec = `<div class="woodrec">
-      <div class="rt">✨ Your best match: ${topKey}</div>
+      <div class="rt">Your best match: ${topKey}</div>
       <div class="rd">${recReason(c.woodPrefs,topKey)}</div>
-      <div class="rd2">👍 A close second: <strong>${secondKey}</strong> — ${WOOD_WHY[secondKey]}</div>
+      <div class="rd2">A close second: <strong>${secondKey}</strong> — ${WOOD_WHY[secondKey]}</div>
       <span class="retake" onclick="retakeWoodQuiz()">↻ Answer the questions again</span>
     </div>`;
   }
@@ -890,7 +868,6 @@ function renderAddonsStep(){
   $('cust-body').innerHTML = `<div class="addongrid">${ADDONS.map(a=>{
     const on=!!c.addons[a.key];
     return `<button class="addon ${on?'on':''}" onclick="toggleAddon('${a.key}')">
-      <span class="aicon">${a.icon}</span>
       <span class="check">${on?'✓':''}</span>
       <span><span class="aname">${a.name}</span><br><span class="adesc">${a.desc}</span></span>
       <span class="aprice">${a.up===0?'Free':'+ $'+a.up}</span>
@@ -925,7 +902,7 @@ function renderReviewStep(){
         <button class="btn btn-ghost btn-big" onclick="startCustomizer(null,false)">Start a new board</button>
       </div>
     </div>
-    <div class="note">💡 <strong>How the live site will work:</strong> this button will drop the exact board — wood, shape, size, design, engraving, and add-ons — straight into the cart, so your customer never re-types a thing. Prices here are estimates; the live version pulls real prices at checkout.</div>`;
+    <div class="note"><strong>How the live site will work:</strong> this button will drop the exact board — wood, shape, size, design, engraving, and add-ons — straight into the cart, so your customer never re-types a thing. Prices here are estimates; the live version pulls real prices at checkout.</div>`;
 }
 
 /* --- running summary sidebar --- */
@@ -1018,7 +995,7 @@ function renderQuickChips(){ $('chatquick').innerHTML = QUICK.map(q=>`<button cl
 function startShopper(){
   go('shopper');
   $('chatlog').innerHTML=''; shopper.interp=null; shopper.offset=0;
-  botSay("Hi! I'm your Copper Fox gift guide. 🦊 Tell me who you're shopping for and the occasion — plus a budget if you have one — and I'll find a few perfect gifts.");
+  botSay("Hi! I'm your Copper Fox gift guide. Tell me who you're shopping for and the occasion — plus a budget if you have one — and I'll find a few perfect gifts.");
   renderQuickChips();
   setTimeout(()=>{ const f=$('chatfield'); if(f) f.focus(); },60);
 }
