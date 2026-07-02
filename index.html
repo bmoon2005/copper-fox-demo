@@ -202,7 +202,33 @@
 
   /* board mockup */
   .mockup{width:100%;height:auto;display:block}
-  .woodpreview{background:#efe7db;border-radius:14px 14px 0 0;overflow:hidden;position:relative}
+  .woodpreview{background:#efe7db;border-radius:14px 14px 0 0;overflow:hidden;position:relative;aspect-ratio:4/3;background-size:cover;background-position:center}
+  .budgetnote{background:var(--copper-tint);color:var(--copper-dark);font-weight:700;font-size:.86rem;border-radius:11px;padding:11px 16px;margin-bottom:16px}
+  .budgetnote .retake{color:var(--copper-dark);text-decoration:underline;cursor:pointer;font-weight:800}
+
+  /* wood-match popup (one question at a time) */
+  .quizmodal{max-width:600px;padding:24px 26px 28px}
+  .qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .qtop .mclose{position:static}
+  .qdots{display:flex;gap:8px}
+  .qdot{width:9px;height:9px;border-radius:50%;background:var(--line);transition:.2s}
+  .qdot.on{background:var(--copper);transform:scale(1.25)}
+  .qdot.done{background:var(--green)}
+  .qstep{font-size:.72rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint)}
+  .qtitle{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:600;line-height:1.15;margin-top:5px}
+  .qhint{color:var(--ink-soft);font-size:.9rem;margin-top:7px}
+  .qphotos{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+  .qphotos.cols3{grid-template-columns:1fr 1fr 1fr}
+  @media(max-width:540px){.qphotos.cols3{grid-template-columns:1fr 1fr}}
+  .qphoto{border:2px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;text-align:center;padding:0 0 13px;transition:.15s}
+  .qphoto:hover{border-color:var(--copper);box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+  .qpimg{aspect-ratio:4/3;background-size:cover;background-position:center;background-color:#efe7db}
+  .qplabel{display:block;font-weight:800;font-size:.9rem;margin-top:11px;padding:0 9px;line-height:1.3}
+  .qbudgets{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+  .qbudget{border:2px solid var(--line);border-radius:12px;background:#fff;padding:22px 16px;font-family:'Fraunces',serif;font-size:1.3rem;font-weight:700;color:var(--copper-dark);transition:.15s}
+  .qbudget:hover{border-color:var(--copper);background:#fdf8f2;transform:translateY(-2px)}
+  .qback{margin-top:20px;background:none;border:none;color:var(--ink-soft);font-weight:800;font-size:.9rem}
+  .qback:hover{color:var(--copper-dark)}
   .mocklabel{position:absolute;bottom:7px;left:0;right:0;text-align:center;font-size:.62rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.85);text-shadow:0 1px 3px rgba(0,0,0,.4)}
   .summary .simg,.review .rimg{background:#efe7db;overflow:hidden}
   .review .rimg .mockup{border-radius:12px}
@@ -421,6 +447,10 @@
   <div class="modal" id="modal"></div>
 </div>
 
+<div class="overlay" id="quizOverlay">
+  <div class="modal quizmodal" id="quizModal"></div>
+</div>
+
 <footer>
   Prototype for Copper Fox Co · Real products, photos &amp; designs from <a href="https://www.copperfoxco.com" target="_blank" rel="noopener">copperfoxco.com</a><br>
   In the live version, the buy buttons carry each customer's exact choices straight into checkout — nothing re-entered.
@@ -611,35 +641,54 @@ function renderGiftSummary(){
 // engraving: 'high' = shows up a lot | 'low' = shows up softer
 // even: true = consistent engraving | false = engraving can look uneven
 // character: 'lots' | 'medium' | 'flawless' | 'uniform'  (natural knots/variation in the wood)
+const WOOD_PHOTO = {
+  Bamboo:'https://cdn.shopify.com/s/files/1/1868/6651/files/073_bamboo_cheese.jpg?v=1748545105',
+  Cherry:'https://cdn.shopify.com/s/files/1/1868/6651/files/016_cherry_small_cheese.jpg?v=1748545445',
+  Walnut:'https://cdn.shopify.com/s/files/1/1868/6651/products/074cheesewalnut.jpg?v=1617052141',
+  Mahogany:'https://cdn.shopify.com/s/files/1/1868/6651/files/047_zip_codde_mahog_med_cheese.jpg?v=1748365694',
+  WalnutAlt:'https://cdn.shopify.com/s/files/1/1868/6651/products/076cheesewalnut.jpg?v=1617038842'
+};
 const WOODS = [
-  {key:'Bamboo', up:0, color:'#cdae7e', contrast:'High', tag:'Most affordable',
-    engraving:'high', even:false, character:'uniform',
+  {key:'Bamboo', up:0, color:'#cdae7e', contrast:'High', tag:'Most affordable', photo:WOOD_PHOTO.Bamboo,
+    engraving:'high', character:'uniform',
     blurb:'Light golden board where your engraving really pops.',
     pros:['Engraving shows up boldly — lots of contrast','Bright, light, modern color','Eco-friendly & fast-renewing','Included — our budget-friendly board'],
     cons:['Made of pressed pieces, so the engraving can look uneven — a little darker or lighter in spots','More uniform look, less natural-wood character']},
-  {key:'Cherry', up:14, color:'#a85c3a', contrast:'High', tag:null,
-    engraving:'high', even:true, character:'medium',
+  {key:'Cherry', up:14, color:'#a85c3a', contrast:'High', tag:null, photo:WOOD_PHOTO.Cherry,
+    engraving:'high', character:'medium',
     blurb:'Warm reddish wood — clear, even engraving with gentle character.',
     pros:['Engraving shows up well and stays even','Warm, inviting reddish tone','Medium natural variation — character without heavy knots','Ages into a deeper, richer color'],
     cons:['A softer hardwood — shows everyday wear a little sooner','Naturally darkens over time from the color you see today']},
-  {key:'Walnut', up:18, color:'#5c4130', contrast:'Lower', pop:true, tag:'Most popular',
-    engraving:'low', even:true, character:'lots',
+  {key:'Walnut', up:18, color:'#5c4130', contrast:'Lower', pop:true, tag:'Most popular', photo:WOOD_PHOTO.Walnut,
+    engraving:'low', character:'lots',
     blurb:'Rich, dark chocolate wood, full of natural character.',
     pros:['Deep, dramatic color — our most-gifted wood','Beautiful natural knots, streaks & variation','A true heirloom look'],
     cons:['Engraving does NOT show up as much — the design reads soft and subtle on the dark wood','Lots of natural variation — gorgeous character to some, not a uniform look']},
-  {key:'Mahogany', up:22, color:'#7a3728', contrast:'High', tag:'Most flawless',
-    engraving:'high', even:true, character:'flawless',
+  {key:'Mahogany', up:22, color:'#7a3728', contrast:'High', tag:'Most flawless', photo:WOOD_PHOTO.Mahogany,
+    engraving:'high', character:'flawless',
     blurb:'Elegant red-brown wood — crisp engraving and almost no flaws.',
     pros:['Engraving shows up clearly and evenly','Almost no knots or imperfections — our most flawless wood','Rich red under-hue','Premium heirloom feel'],
     cons:['Our top price point']},
 ];
 const WOOD_Q = [
-  {k:'vis', q:'How much do you want the engraving to show up?',
-    opts:[['high','Show it off — bold & clear'],['low','Softer & more subtle']]},
-  {k:'character', q:'How do you feel about natural knots, streaks & variation in the wood?',
-    opts:[['lots','I love the natural character'],['medium','A balanced, moderate look'],['flawless','Clean & nearly flawless']]},
-  {k:'even', q:'Should the engraving look even & consistent across the whole board?',
-    opts:[['yes','Yes — nice and even'],['ok','A little variation is fine']]},
+  {k:'vis', type:'photo', q:'Which engraving look do you like best?', hint:'Both are beautiful — it comes down to taste.',
+    opts:[
+      {v:'high', label:'Bold & clearly visible', photo:WOOD_PHOTO.Bamboo},
+      {v:'low',  label:'Soft & subtle',          photo:WOOD_PHOTO.Walnut},
+    ]},
+  {k:'character', type:'photo', q:'How much natural character do you like in the wood?', hint:'Every board is one of a kind — this is how much variation you’ll see.',
+    opts:[
+      {v:'flawless', label:'Little — clean & consistent',       photo:WOOD_PHOTO.Mahogany},
+      {v:'medium',   label:'Some — a touch of character',       photo:WOOD_PHOTO.Cherry},
+      {v:'lots',     label:'Lots — knots & natural variation',  photo:WOOD_PHOTO.WalnutAlt},
+    ]},
+  {k:'budget', type:'budget', q:"What's your budget per board?", hint:"We'll only show woods and sizes that fit.",
+    opts:[
+      {v:[0,24.99], label:'Under $25'},
+      {v:[25,50],   label:'$25 – $50'},
+      {v:[50,100],  label:'$50 – $100'},
+      {v:[0,9999],  label:'No limit'},
+    ]},
 ];
 function scoreWoods(p){
   const s={Bamboo:0,Cherry:0,Walnut:0,Mahogany:0};
@@ -648,8 +697,6 @@ function scoreWoods(p){
   if(p.character==='lots'){     s.Walnut+=3; s.Cherry+=1; }
   if(p.character==='medium'){   s.Cherry+=3; s.Mahogany+=1; }
   if(p.character==='flawless'){ s.Mahogany+=3; s.Bamboo+=1; }
-  if(p.even==='yes'){ s.Cherry+=1; s.Mahogany+=1; s.Walnut+=1; s.Bamboo-=2; }
-  if(p.even==='ok'){  s.Bamboo+=1; }
   return s;
 }
 const WOOD_WHY = {
@@ -659,11 +706,15 @@ const WOOD_WHY = {
   Bamboo:'Bamboo makes the engraving pop and keeps things light and budget-friendly.'
 };
 function recReason(p,key){
-  const vis = p.vis==='high' ? 'engraving that really stands out' : 'a soft, subtle engraving';
-  const ch  = {lots:'lots of natural character',medium:'a balanced, moderate look',flawless:'a clean, flawless surface'}[p.character];
-  const ev  = p.even==='yes' ? 'even engraving throughout' : "you're fine with a little variation";
-  return `You told us you'd like ${vis}, ${ch}, and ${ev}. ${WOOD_WHY[key]}`;
+  const vis = p.vis==='high' ? 'an engraving that clearly shows' : 'a soft, subtle engraving';
+  const ch  = {lots:'lots of natural character',medium:'a touch of natural character',flawless:'a clean, flawless look'}[p.character];
+  return `You liked ${vis} and ${ch}. ${WOOD_WHY[key]}`;
 }
+/* budget-aware availability */
+function budgetHi(){ return state.budget ? state.budget[1] : 9999; }
+function woodMinPrice(woodKey){ const w=WOODS.find(x=>x.key===woodKey); const minBase=Math.min.apply(null,SIZES.map(s=>s.base)); return minBase + (w?w.up:0); }
+function affordableWoods(){ const hi=budgetHi(); const list=WOODS.filter(w=>woodMinPrice(w.key)<=hi); return list.length?list:WOODS; }
+function affordableSizes(woodKey){ const hi=budgetHi(); const up=(WOODS.find(x=>x.key===woodKey)||{up:0}).up; const list=SIZES.filter(s=>s.base+up<=hi); return list.length?list:SIZES; }
 const ADDONS = [
   {key:'giftbox', name:'Gift box packaging', up:8,  desc:'Arrives ready-to-give in a branded gift box.'},
   {key:'oil',     name:'Board conditioning oil', up:12, desc:'Food-safe oil to keep the wood rich for years.'},
@@ -824,37 +875,44 @@ function renderDesignStep(){
 }
 function pickDesign(handle){ state.cust.design=C.boards.find(b=>b.handle===handle); custNext(); }
 
-/* --- step 1: wood (quiz first, then recommend) --- */
+/* --- step 1: wood (popup quiz first, then recommend) --- */
+let quizState={qi:0, ans:{}, _open:false};
 function renderWoodStep(){
   const c=state.cust;
   if(!c.woodQuizDone){
-    setHead('Build your board · Step 1 of '+STEP_TOTAL,'Start with the wood',"First, a few quick questions and we'll point you to the wood that fits you best.");
-    renderWoodQuiz(); return;
+    setHead('Build your board · Step 1 of '+STEP_TOTAL,"Let's find your wood",'Answer three quick questions and we’ll match you to the perfect wood.');
+    $('cust-body').innerHTML = `<div class="navrow" style="margin-top:8px">
+      <button class="btn btn-copper btn-big" onclick="openWoodQuiz()">Find my wood →</button>
+      <button class="btn btn-ghost btn-big" onclick="skipWoodQuiz()">Skip — show all woods</button>
+    </div>`;
+    if(!quizState._open) openWoodQuiz();
+    return;
   }
-  setHead('Build your board · Step 1 of '+STEP_TOTAL,'Choose your wood','Here they are — the honest good and not-so-good of each. Pick whichever you love.');
-  // rank by quiz score if taken
-  let woods = WOODS.slice(), topKey=null, secondKey=null, rec='';
+  const hi=budgetHi();
+  const bnote = hi<9999 ? `<div class="budgetnote">Showing woods and sizes that fit your ${hi<=25?'under $25':'$'+state.budget[0]+'–$'+Math.round(hi)} budget · <span class="retake" onclick="openWoodQuiz()">change</span></div>` : '';
+  setHead('Build your board · Step 1 of '+STEP_TOTAL,'Choose your wood','Here they are — pick whichever you love.');
+  let woods = affordableWoods(), topKey=null, secondKey=null, rec='';
   if(c.woodPrefs){
-    const s = scoreWoods(c.woodPrefs);
-    woods.sort((a,b)=> (s[b.key]-s[a.key]) || (WOODS.indexOf(a)-WOODS.indexOf(b)));
-    topKey = woods[0].key;
-    secondKey = woods[1].key;
-    rec = `<div class="woodrec">
+    const s=scoreWoods(c.woodPrefs);
+    woods=woods.slice().sort((a,b)=>(s[b.key]-s[a.key])||(WOODS.indexOf(a)-WOODS.indexOf(b)));
+    topKey=woods[0]&&woods[0].key;
+    secondKey=woods[1]&&woods[1].key;
+    if(topKey) rec=`<div class="woodrec">
       <div class="rt">Your best match: ${topKey}</div>
       <div class="rd">${recReason(c.woodPrefs,topKey)}</div>
-      <div class="rd2">A close second: <strong>${secondKey}</strong> — ${WOOD_WHY[secondKey]}</div>
-      <span class="retake" onclick="retakeWoodQuiz()">↻ Answer the questions again</span>
+      ${secondKey?`<div class="rd2">A close second: <strong>${secondKey}</strong> — ${WOOD_WHY[secondKey]}</div>`:''}
+      <span class="retake" onclick="openWoodQuiz()">↻ Answer the questions again</span>
     </div>`;
   }
-  $('cust-body').innerHTML = rec + `<div class="woodgrid">${woods.map(w=>{
-    const sel = c.wood===w.key;
-    const ck = w.contrast==='High'?'high':'low';
-    const badge = w.key===topKey ? '<span class="badge match">★ Your match</span>'
-                : w.key===secondKey ? '<span class="badge second">2nd choice</span>'
-                : (w.pop ? '<span class="badge pop">Most Popular</span>' : '');
+  $('cust-body').innerHTML = bnote + rec + `<div class="woodgrid">${woods.map(w=>{
+    const sel=c.wood===w.key;
+    const ck=w.contrast==='High'?'high':'low';
+    const badge = w.key===topKey?'<span class="badge match">★ Your match</span>'
+                : w.key===secondKey?'<span class="badge second">2nd choice</span>'
+                : (w.pop?'<span class="badge pop">Most Popular</span>':'');
     return `<div class="opt wood woodcard ${sel?'selected':''}" onclick="pickWood('${w.key}')">
       ${badge}
-      <div class="woodpreview">${boardMockup(w.key,'With Handle',['Smith','est. 2024'])}<div class="mocklabel">Sample engraving on ${w.key.toLowerCase()}</div></div>
+      <div class="woodpreview" style="background-image:url('${w.photo}')"></div>
       <div class="obody">
         <h4>${w.key}<span class="contrast ${ck}">Engraving: ${w.contrast}</span></h4>
         <div class="blurb">${w.blurb}</div>
@@ -866,25 +924,45 @@ function renderWoodStep(){
       </div>
     </div>`;}).join('')}</div>`;
 }
-function renderWoodQuiz(){
-  const p = state.cust.woodPrefs || {};
-  const done = WOOD_Q.every(q=>p[q.k]);
-  $('cust-body').innerHTML = `<div class="quiz">
-    ${WOOD_Q.map(q=>`<div class="qgroup">
-      <div class="qq">${q.q}</div>
-      <div class="qopts">${q.opts.map(([v,l])=>
-        `<button class="qopt ${p[q.k]===v?'on':''}" onclick="setWoodPref('${q.k}','${v}')">${l}</button>`).join('')}</div>
-    </div>`).join('')}
-    <div class="navrow">
-      <button class="btn btn-copper btn-big" ${done?'':'disabled'} onclick="finishWoodQuiz()">Show my wood match →</button>
-      <button class="btn btn-ghost btn-big" onclick="skipWoodQuiz()">Skip — just show all woods</button>
-    </div>
-  </div>`;
+/* one-question-at-a-time popup */
+function openWoodQuiz(){ quizState={qi:0, ans:{}, _open:true}; $('quizOverlay').classList.add('open'); renderQuiz(); }
+function closeWoodQuiz(){ quizState._open=false; $('quizOverlay').classList.remove('open'); }
+function renderQuiz(){
+  const q=WOOD_Q[quizState.qi], n=WOOD_Q.length, i=quizState.qi;
+  const dots=WOOD_Q.map((_,k)=>`<span class="qdot ${k===i?'on':''} ${k<i?'done':''}"></span>`).join('');
+  let opts;
+  if(q.type==='photo'){
+    opts=`<div class="qphotos ${q.opts.length===3?'cols3':''}">${q.opts.map((o,oi)=>`
+      <button class="qphoto" onclick="answerQuiz(${oi})">
+        <div class="qpimg" style="background-image:url('${o.photo}')"></div>
+        <span class="qplabel">${o.label}</span>
+      </button>`).join('')}</div>`;
+  } else {
+    opts=`<div class="qbudgets">${q.opts.map((o,oi)=>`<button class="qbudget" onclick="answerQuiz(${oi})">${o.label}</button>`).join('')}</div>`;
+  }
+  $('quizModal').innerHTML = `
+    <div class="qtop"><div class="qdots">${dots}</div><button class="mclose" onclick="skipWoodQuiz()">×</button></div>
+    <div class="qstep">Question ${i+1} of ${n}</div>
+    <h3 class="qtitle">${q.q}</h3>
+    ${q.hint?`<p class="qhint">${q.hint}</p>`:''}
+    ${opts}
+    ${i>0?`<button class="qback" onclick="quizBack()">← Back</button>`:''}`;
 }
-function setWoodPref(k,v){ (state.cust.woodPrefs = state.cust.woodPrefs||{})[k]=v; renderWoodQuiz(); }
-function finishWoodQuiz(){ state.cust.woodQuizDone=true; renderCust(); window.scrollTo({top:0}); }
-function skipWoodQuiz(){ state.cust.woodQuizDone=true; state.cust.woodPrefs=null; renderCust(); window.scrollTo({top:0}); }
-function retakeWoodQuiz(){ state.cust.woodQuizDone=false; renderCust(); window.scrollTo({top:0}); }
+function answerQuiz(oi){
+  const q=WOOD_Q[quizState.qi];
+  quizState.ans[q.k]=q.opts[oi].v;
+  if(quizState.qi<WOOD_Q.length-1){ quizState.qi++; renderQuiz(); }
+  else finishWoodQuiz();
+}
+function quizBack(){ if(quizState.qi>0){ quizState.qi--; renderQuiz(); } }
+function finishWoodQuiz(){
+  const a=quizState.ans;
+  state.cust.woodPrefs={vis:a.vis, character:a.character};
+  if(a.budget) state.budget=a.budget.slice();
+  state.cust.woodQuizDone=true;
+  closeWoodQuiz(); renderCust(); window.scrollTo({top:0});
+}
+function skipWoodQuiz(){ state.cust.woodQuizDone=true; closeWoodQuiz(); renderCust(); window.scrollTo({top:0}); }
 function pickWood(key){ state.cust.wood=key; custNext(); }
 
 /* --- step 2: style / shape --- */
@@ -905,9 +983,11 @@ function pickStyle(key){ state.cust.style=key; custNext(); }
 function renderSizeStep(){
   const c=state.cust;
   setHead('Build your board · Step 3 of '+STEP_TOTAL,'Choose the size',"Not sure? Medium 8×15″ is our most-gifted size. Prices include your "+c.wood+" wood.");
+  const sizes=affordableSizes(c.wood);
   $('cust-body').innerHTML = `
     <div class="sizesec">
-      ${SIZES.map(s=>`
+      ${budgetHi()<9999?`<div class="budgetnote" style="margin-bottom:14px">Showing sizes under $${Math.round(budgetHi())} in ${c.wood}.</div>`:''}
+      ${sizes.map(s=>`
         <button class="sizeopt ${c.size===s.name?'selected':''}" onclick="pickSize('${s.name.replace(/'/g,"\\'")}')">
           <span><span class="sname">${s.name}</span>${s.pop?' <span class="badge pop" style="position:static;display:inline-block">Most Gifted</span>':''}<br><span class="suse">${s.use}</span></span>
           <span class="sprice">$${priceOf(s.name,c.wood)}</span>
