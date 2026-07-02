@@ -249,7 +249,8 @@
   .addon .aprice{margin-left:auto;font-weight:900;color:var(--copper-dark);white-space:nowrap}
 
   /* size list */
-  .sizesec h6{font-size:.76rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin:28px 0 12px}
+  .sizesec h6,.giftopt h6{font-size:.76rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin:28px 0 12px}
+  .giftopt:first-child h6{margin-top:6px}
   .sizeopt{display:flex;justify-content:space-between;align-items:center;width:100%;background:#fff;border:2px solid var(--line);border-radius:12px;padding:14px 17px;margin-bottom:10px;text-align:left;transition:.13s}
   .sizeopt:hover{border-color:var(--copper)}
   .sizeopt.selected{border-color:var(--copper);background:#fdf8f2;box-shadow:0 0 0 3px var(--copper-soft)}
@@ -315,7 +316,7 @@
     <h1>What brings you in today?</h1>
     <p class="sub">Pick where you'd like to start — we'll walk you the rest of the way, no overwhelm.</p>
     <div class="choices">
-      <button class="choice" onclick="startCustomizer(null,false)">
+      <button class="choice" onclick="startCustomizer(null,'home')">
         <span class="ic">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6.5" width="14" height="14" rx="2.5"/><circle cx="20" cy="5" r="1.5"/><path d="m18.7 6.3-1.4 1.4"/><path d="M6.5 11h7M6.5 14h7M6.5 17h4.5"/></svg>
         </span>
@@ -402,6 +403,18 @@
     </div>
   </section>
 
+  <!-- ============================ GIFT CUSTOMIZER (non-board) ============================ -->
+  <section class="screen" id="scr-gift">
+    <button class="backbtn" onclick="giftBack()">← Back</button>
+    <span class="eyebrow" id="gift-eyebrow"></span>
+    <h1 id="gift-title">Make it theirs</h1>
+    <p class="sub" id="gift-sub">Choose your options and add the personalization — we'll make it just for them.</p>
+    <div class="custwrap">
+      <div id="gift-body"></div>
+      <aside class="summary" id="gift-summary"></aside>
+    </div>
+  </section>
+
 </main>
 
 <div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
@@ -424,7 +437,8 @@ const PRODUCT_URL = h => `https://www.copperfoxco.com/products/${h}`;
 const state = {
   occasion:null, catFilter:null, catLabel:'',
   budget:[0,9999], shown:9,
-  cust:{ step:1, wood:null, style:null, size:null, design:null, fields:{}, addons:{}, fromResults:false }
+  cust:{ step:1, wood:null, style:null, size:null, design:null, fields:{}, addons:{}, origin:'home' },
+  gift:{ p:null, sel:{}, text:'', origin:'results' }
 };
 
 /* ============================ NAV ============================ */
@@ -435,6 +449,7 @@ function go(screen){
   window.scrollTo({top:0});
   if(screen==='results') renderResults();
   if(screen==='cust')    renderCust();
+  if(screen==='gift')    renderGift();
 }
 
 /* ============================ OCCASIONS ============================ */
@@ -503,10 +518,10 @@ function cardHTML(p){
   const isBoard = p.type==='Wooden Cutting Board';
   const badge = p.giftbox ? '<span class="badge box">Gift Box</span>' : (p.best ? '<span class="badge best">Best Seller</span>' : '');
   const price = p.min===p.max ? `$${p.min}` : `from $${p.min}`;
-  const action = isBoard ? `customizeFromCard(${i})` : `openModal(${i})`;
+  const action = isBoard ? `customizeFromCard(${i},'results')` : `startGift(${i},'results')`;
   const btn = isBoard
-    ? `<button class="btn btn-copper" onclick="event.stopPropagation();customizeFromCard(${i})">Customize this board →</button>`
-    : `<button class="btn btn-copper" onclick="event.stopPropagation();openModal(${i})">Personalize &amp; order</button>`;
+    ? `<button class="btn btn-copper" onclick="event.stopPropagation();customizeFromCard(${i},'results')">Customize this board →</button>`
+    : `<button class="btn btn-copper" onclick="event.stopPropagation();startGift(${i},'results')">Customize this gift →</button>`;
   return `<div class="opt" onclick="${action}">
     ${badge}
     <div class="oimg" style="background-image:url('${p.img}')"></div>
@@ -534,6 +549,63 @@ function openModal(i){
   $('overlay').classList.add('open');
 }
 function closeModal(){ $('overlay').classList.remove('open'); }
+
+/* ============================ GIFT CUSTOMIZER (non-board products) ============================ */
+function isSkipOpt(o){ return o.name==='Title' || (o.values.length===1 && /default title/i.test(o.values[0])); }
+function giftOpts(p){ return (p.options||[]).filter(o=>!isSkipOpt(o)); }
+function startGift(i, origin){
+  const p=C.products[i];
+  const sel={}; giftOpts(p).forEach(o=>{ sel[o.name]=o.values[0]; });
+  state.gift = { p, sel, text:'', origin:origin||'results' };
+  go('gift');
+}
+function giftBack(){ go(state.gift.origin==='shopper'?'shopper':'results'); }
+function pickGiftOpt(oi, vi){
+  const opts=giftOpts(state.gift.p); const o=opts[oi];
+  state.gift.sel[o.name]=o.values[vi];
+  renderGift();
+}
+function renderGift(){
+  const g=state.gift, p=g.p; if(!p) return;
+  $('gift-eyebrow').textContent = p.type;
+  const opts=giftOpts(p);
+  $('gift-body').innerHTML =
+    opts.map((o,oi)=>`
+      <div class="giftopt">
+        <h6>${esc(o.name)}</h6>
+        <div class="chips left">${o.values.map((v,vi)=>
+          `<button class="chip ${g.sel[o.name]===v?'on':''}" onclick="pickGiftOpt(${oi},${vi})">${esc(v)}</button>`).join('')}</div>
+      </div>`).join('') +
+    `<div class="giftopt">
+      <h6>Personalization</h6>
+      <div class="fieldwrap" style="margin-top:0">
+        <div class="field">
+          <input type="text" placeholder="Names, date, or monogram — exactly as you'd like it"
+            value="${esc(g.text)}" oninput="state.gift.text=this.value;renderGiftSummary()">
+          <div class="hint">Leave blank if you'd prefer no personalization.</div>
+        </div>
+      </div>
+    </div>`;
+  renderGiftSummary();
+}
+function renderGiftSummary(){
+  const g=state.gift, p=g.p; if(!p) return;
+  const opts=giftOpts(p);
+  const price = p.min===p.max ? ('$'+p.min) : ('from $'+p.min);
+  $('gift-summary').innerHTML = `
+    <h5>Your gift so far</h5>
+    <div class="sumgrid">
+      <div class="simg" style="background-image:url('${p.img}')"></div>
+      <div class="sumdetails">
+        <div class="srow"><span class="k">Gift</span><span class="v">${esc(p.title)}</span></div>
+        ${opts.map(o=>`<div class="srow"><span class="k">${esc(o.name)}</span><span class="v">${esc(g.sel[o.name]||'—')}</span></div>`).join('')}
+        <div class="srow"><span class="k">Personalization</span><span class="v">${g.text?esc(g.text):'—'}</span></div>
+        <div class="stotal"><span>Price</span><span class="amt">${price}</span></div>
+        <a class="btn btn-copper btn-big" style="margin-top:16px;width:100%" href="${PRODUCT_URL(p.handle)}" target="_blank" rel="noopener">Add to cart on copperfoxco.com ↗</a>
+        <div class="snote">Personalization is always included. Final price &amp; options confirmed at checkout.</div>
+      </div>
+    </div>`;
+}
 
 /* ============================ BOARD CUSTOMIZER ============================ */
 // engraving: 'high' = shows up a lot | 'low' = shows up softer
@@ -693,12 +765,12 @@ const THEMES = [
 ];
 let themeFilter='all';
 
-function customizeFromCard(i){ startCustomizer(C.products[i].handle, true); }
-function startCustomizer(handle, fromResults){
+function customizeFromCard(i, origin){ startCustomizer(C.products[i].handle, origin||'results'); }
+function startCustomizer(handle, origin){
   // wood-first: always begin at step 1. If a specific design was chosen from a
   // gift result, preselect it so it's already highlighted on the Design step.
   const design = handle ? C.boards.find(b=>b.handle===handle) : null;
-  state.cust = { step:1, woodQuizDone:false, woodPrefs:null, wood:null, style:null, size:null, design, fields:{}, addons:{}, fromResults:!!fromResults };
+  state.cust = { step:1, woodQuizDone:false, woodPrefs:null, wood:null, style:null, size:null, design, fields:{}, addons:{}, origin:origin||'home' };
   themeFilter = (!design && state.occasion && ['wedding','mom','dad'].includes(state.occasion)) ? state.occasion
               : (!design && state.occasion==='housewarming') ? 'home' : 'all';
   go('cust');
@@ -706,7 +778,7 @@ function startCustomizer(handle, fromResults){
 function custBack(){
   const c=state.cust;
   if(c.step>1){ c.step--; renderCust(); window.scrollTo({top:0}); }
-  else go(c.fromResults ? 'results' : 'home');
+  else go(c.origin||'home');
 }
 function custNext(){ state.cust.step++; renderCust(); window.scrollTo({top:0}); }
 
@@ -899,7 +971,7 @@ function renderReviewStep(){
       <div class="stotal"><span>Estimated total</span><span class="amt">$${totalPrice(c)}</span></div>
       <div class="navrow">
         <a class="btn btn-copper btn-big" href="${PRODUCT_URL(c.design.handle)}" target="_blank" rel="noopener">Add to cart on copperfoxco.com ↗</a>
-        <button class="btn btn-ghost btn-big" onclick="startCustomizer(null,false)">Start a new board</button>
+        <button class="btn btn-ghost btn-big" onclick="startCustomizer(null,'home')">Start a new board</button>
       </div>
     </div>
     <div class="note"><strong>How the live site will work:</strong> this button will drop the exact board — wood, shape, size, design, engraving, and add-ons — straight into the cart, so your customer never re-types a thing. Prices here are estimates; the live version pulls real prices at checkout.</div>`;
@@ -1009,7 +1081,7 @@ function botCards(list){
     const i=C.products.indexOf(p), isBoard=p.type==='Wooden Cutting Board';
     const badge=p.giftbox?'<span class="cbadge box">Gift Box</span>':(p.best?'<span class="cbadge best">Best Seller</span>':'');
     const price=p.min===p.max?('$'+p.min):('from $'+p.min);
-    return `<div class="ccard" onclick="${isBoard?`customizeFromCard(${i})`:`openModal(${i})`}">
+    return `<div class="ccard" onclick="${isBoard?`customizeFromCard(${i},'shopper')`:`startGift(${i},'shopper')`}">
       <div class="cimg" style="background-image:url('${p.img}')">${badge}</div>
       <div class="cb"><h4>${esc(p.title)}</h4><div class="price">${price}</div></div></div>`;
   }).join('');
