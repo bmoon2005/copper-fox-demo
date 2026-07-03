@@ -208,15 +208,15 @@
   .budgetnote .retake{color:var(--copper-dark);text-decoration:underline;cursor:pointer;font-weight:800}
 
   /* wood-match popup (one question at a time) */
-  .quizmodal{max-width:600px;padding:24px 26px 28px}
-  .qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .modal.quizmodal{max-width:620px;padding:34px 38px 40px;max-height:92vh;overflow-y:auto}
+  .qtop{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
   .qtop .mclose{position:static}
   .qdots{display:flex;gap:8px}
   .qdot{width:9px;height:9px;border-radius:50%;background:var(--line);transition:.2s}
   .qdot.on{background:var(--copper);transform:scale(1.25)}
   .qdot.done{background:var(--green)}
   .qstep{font-size:.72rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint)}
-  .qtitle{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:600;line-height:1.15;margin-top:5px}
+  .qtitle{font-family:'Fraunces',serif;font-size:clamp(1.3rem,4vw,1.5rem);font-weight:600;line-height:1.2;margin-top:6px}
   .qhint{color:var(--ink-soft);font-size:.9rem;margin-top:7px}
   .qphotos{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
   .qphotos.cols3{grid-template-columns:1fr 1fr 1fr}
@@ -484,12 +484,24 @@ function go(screen){
 }
 
 /* ============================ OCCASIONS ============================ */
-// order occasions by how many gifts back them (richest first), then a sensible tail
-const OCC_ORDER = ['wedding','housewarming','birthday','mom','thankyou','anniversary','graduation','dad','baby','memorial'];
+// display labels + which occasions show as tags (overrides catalog labels)
+const OCC_LABELS = {
+  wedding:'Wedding & Engagement',
+  housewarming:'Housewarming',
+  mom:"Mother's Day",
+  dad:"Father's Day",
+  anniversary:'Anniversary',
+  graduation:'Graduation',
+  thankyou:'Thank You',
+  memorial:'Sympathy & Loss',
+};
+const OCC_ORDER = ['wedding','housewarming','mom','dad','anniversary','graduation','thankyou','memorial'];
+function occLabel(key){ return OCC_LABELS[key] || (C.occasions[key] && C.occasions[key].label) || key; }
+// "shop by who it's for" — no "For" prefix, alphabetical
 const PERSONS = [
-  ['For Mom','mom'],['For Grandma','mom'],['For Dad','dad'],['For a Couple','wedding'],
-  ['New Homeowner','housewarming'],['A Teacher','thankyou'],['A Coworker','thankyou'],
-  ['The Graduate','graduation'],['A Friend','birthday'],['New Parents','baby']
+  ['A Couple','wedding'],['A Coworker','thankyou'],['A Teacher','thankyou'],
+  ['Dad','dad'],['Grandma','mom'],['Mom','mom'],
+  ['New Homeowner','housewarming'],['The Graduate','graduation']
 ];
 
 function occPhoto(key){
@@ -499,7 +511,7 @@ function occPhoto(key){
 }
 function renderOccasions(){
   $('occ-grid').innerHTML = OCC_ORDER.filter(k=>C.occasions[k]).map(key=>
-    `<button class="chip" onclick="pickOccasion('${key}')">${C.occasions[key].label}</button>`).join('');
+    `<button class="chip" onclick="pickOccasion('${key}')">${occLabel(key)}</button>`).join('');
   $('person-chips').innerHTML = PERSONS.map(([label,key])=>
     `<button class="chip" onclick="pickOccasion('${key}')">${label}</button>`).join('');
 }
@@ -524,7 +536,7 @@ function curatedPool(){
   return mixed;
 }
 function renderResults(){
-  const label = state.catFilter ? state.catLabel : C.occasions[state.occasion].label;
+  const label = state.catFilter ? state.catLabel : occLabel(state.occasion);
   $('results-title').textContent = state.catFilter ? label : `Our best ${label} gifts`;
   // refine bar (budget only — optional, zero forced steps)
   $('refinebar').innerHTML = `<span class="rlabel">Budget</span>` + BUDGETS.map(([lbl,lo,hi])=>{
